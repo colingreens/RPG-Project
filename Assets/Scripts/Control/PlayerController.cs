@@ -6,6 +6,12 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        private Fighter fighter;
+        private void Start()
+        {
+            fighter = GetComponent<Fighter>();
+        }
+
         void Update()
         {
             if (InteractWithCombat())
@@ -20,11 +26,12 @@ namespace RPG.Control
             foreach (var hit in hitArray)
             {
                 var target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null)
+                
+                if (!fighter.CanAttack(target))
                     continue;
 
                 if (Input.GetMouseButtonDown(0))
-                    GetComponent<Fighter>().Attack(target);
+                    fighter.Attack(target);
 
                 return true;
             }
