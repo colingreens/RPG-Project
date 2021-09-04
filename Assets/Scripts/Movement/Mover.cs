@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 namespace RPG.Movement
-{    public class Mover : MonoBehaviour, IAction
-     {
+{
+    public class Mover : MonoBehaviour, IAction
+    {
         NavMeshAgent navMeshAgent;
 
         private void Start()

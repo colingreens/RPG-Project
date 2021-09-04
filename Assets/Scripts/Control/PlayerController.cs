@@ -26,7 +26,7 @@ namespace RPG.Control
             foreach (var hit in hitArray)
             {
                 var target = hit.transform.GetComponent<CombatTarget>();
-                
+
                 if (!fighter.CanAttack(target))
                     continue;
 

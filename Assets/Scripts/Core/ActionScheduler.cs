@@ -5,7 +5,7 @@ namespace RPG.Core
     public class ActionScheduler : MonoBehaviour
     {
         IAction currentAction;
-        
+
         public void StartAction(IAction action)
         {
 
@@ -16,7 +16,7 @@ namespace RPG.Core
             {
                 currentAction.Cancel();
             }
-            
+
             currentAction = action;
         }
     }

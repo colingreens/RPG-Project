@@ -13,11 +13,11 @@ namespace RPG.Combat
 
         private Health target;
         private float timeSinceLastAttack;
-        
+
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-            
+
             if (target == null)
                 return;
             if (target.IsDead())
@@ -40,9 +40,9 @@ namespace RPG.Combat
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
                 //this will trigger the hit event
-                GetComponent<Animator>().SetTrigger("attack");
+                TriggerAttack();
                 timeSinceLastAttack = 0;
-            }                
+            }
         }
 
         public bool CanAttack(CombatTarget combatTarget)
@@ -66,14 +66,27 @@ namespace RPG.Combat
 
         public void Cancel()
         {
-            GetComponent<Animator>().SetTrigger("stopAttack");
+            StopAttack();
             target = null;
+        }
+
+        private void StopAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("attack");
+            GetComponent<Animator>().SetTrigger("stopAttack");
+        }
+
+        private void TriggerAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("attack");
+            GetComponent<Animator>().SetTrigger("attack");
         }
 
         //Animation Event
         void Hit()
         {
-            target.TakeDamage(weaponDamage);
+            if (target != null)
+                target.TakeDamage(weaponDamage);
         }
     }
 }
