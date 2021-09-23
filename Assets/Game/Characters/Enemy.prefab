@@ -26,6 +26,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1632a5dc564051e45baffc06a1aa337a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &146966701883147512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047036819571935916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4319ddf4dbb758140bd283d34c892cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chase: 5
 --- !u!1001 &3152529329946183020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33,9 +46,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1063911325, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
+      propertyPath: m_Speed
+      value: 4.66
+      objectReference: {fileID: 0}
     - target: {fileID: 110680615584419776, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
       propertyPath: m_Name
-      value: Enemy (2)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 110680615584419788, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
       propertyPath: m_RootOrder
