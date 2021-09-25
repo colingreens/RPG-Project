@@ -8,11 +8,13 @@ namespace RPG.Core
 {
     public class AIController : MonoBehaviour
     {
-        [SerializeField] float chase = 5f;
+        [SerializeField] float chasedistance = 5f;
         [SerializeField] float suspicionTime = 5f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointWaitTime = 4f;
         [SerializeField] float wayPointTolerance = 1f;
+        [Range(0,1)]
+        [SerializeField] float patrolSpeedFraction = 0.2f;
 
         Fighter fighter;
         Health health;
@@ -71,7 +73,7 @@ namespace RPG.Core
             }
 
             if (timeSinceArrivedInWayPoint > waypointWaitTime)
-                mover.StartMoveAction(nextPosition);
+                mover.StartMoveAction(nextPosition, patrolSpeedFraction);
 
         }
 
@@ -104,14 +106,14 @@ namespace RPG.Core
 
         private bool InAttackRangeOfPlayer()
         {
-            return Vector3.Distance(transform.position, player.transform.position) < chase;
+            return Vector3.Distance(transform.position, player.transform.position) < chasedistance;
         }
 
         //Called by Unity
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, chase);
+            Gizmos.DrawWireSphere(transform.position, chasedistance);
         }
     }
 }

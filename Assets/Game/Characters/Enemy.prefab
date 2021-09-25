@@ -38,7 +38,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4319ddf4dbb758140bd283d34c892cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chase: 5
+  chasedistance: 5
+  suspicionTime: 5
+  patrolPath: {fileID: 0}
+  waypointWaitTime: 4
+  wayPointTolerance: 1
+  patrolSpeedFraction: 0.2
 --- !u!1001 &3152529329946183020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46,6 +51,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1063911324, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
+      propertyPath: maxSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1063911325, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
       propertyPath: m_Speed
       value: 4.66
@@ -97,6 +106,10 @@ PrefabInstance:
     - target: {fileID: 110680615584419788, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 2225439134188676974, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
+      propertyPath: weaponDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6683169676326720524, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
       propertyPath: healthPoints
