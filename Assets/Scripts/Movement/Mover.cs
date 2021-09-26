@@ -2,6 +2,7 @@ using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Saving;
+using System.Collections.Generic;
 
 namespace RPG.Movement
 {
@@ -50,15 +51,27 @@ namespace RPG.Movement
             GetComponent<Animator>().SetFloat("forwardSpeed", speed);
         }
 
+        [System.Serializable]
+        private struct MoverSaveData
+        {
+            public SerializableVector3 position;
+            public SerializableVector3 rotation;
+        }
+
         public object CaptureState()
         {
-            return new SerializableVector3(transform.position);
+            return new MoverSaveData
+            {
+                position = new SerializableVector3(transform.position),
+                rotation = new SerializableVector3(transform.eulerAngles)
+            };
         }
 
         public void RestoreState(object state)
         {
-            var position = (SerializableVector3) state;
-            _ = GetComponent<NavMeshAgent>().Warp(position.ToVector());
+            var data = (MoverSaveData) state;
+            _ = GetComponent<NavMeshAgent>().Warp(data.position.ToVector());
+            transform.eulerAngles = (data.rotation).ToVector();
         }
     }
 }
