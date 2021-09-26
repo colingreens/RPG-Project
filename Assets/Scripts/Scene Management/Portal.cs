@@ -39,13 +39,22 @@ namespace RPG.SceneManagement
             var fader = FindObjectOfType<Fader>();
 
             yield return fader.FadeOut(fadeOutTime);
+
+             var saver = FindObjectOfType<SavingWrapper>();
+
+            saver.Save();
+
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+
+             saver.Load();
 
             var otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
+
+            saver.Save();
 
             Destroy(gameObject);
         }

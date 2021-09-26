@@ -1,4 +1,5 @@
 using RPG.Saving;
+using System.Collections;
 using UnityEngine;
 
 namespace RPG.SceneManagement
@@ -6,6 +7,11 @@ namespace RPG.SceneManagement
     public class SavingWrapper : MonoBehaviour
     {
         const string defaultSaveFile = "save";
+
+        private IEnumerator Start()
+        {
+            yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
+        }
 
         private void Update()
         {
@@ -16,12 +22,12 @@ namespace RPG.SceneManagement
                 Save();
         }
 
-        private void Save()
+        public void Save()
         {
             GetComponent<SavingSystem>().Save(defaultSaveFile);
         }
 
-        private void Load()
+        public void Load()
         {
             GetComponent<SavingSystem>().Load(defaultSaveFile);
         }
