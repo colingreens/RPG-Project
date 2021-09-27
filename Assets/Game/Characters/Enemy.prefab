@@ -108,9 +108,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2225439134188676974, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 88aef174b3e302347a74678777610f8a, type: 2}
+    - target: {fileID: 2225439134188676974, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
       propertyPath: weaponDamage
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2225439134188676974, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
+      propertyPath: handTransform
+      value: 
+      objectReference: {fileID: 7122442308067517277}
     - target: {fileID: 6683169676326720524, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
       propertyPath: healthPoints
       value: 40
@@ -184,3 +192,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+--- !u!4 &7122442308067517277 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 423694, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+  m_PrefabInstance: {fileID: 7122442308067628115}
+  m_PrefabAsset: {fileID: 0}
