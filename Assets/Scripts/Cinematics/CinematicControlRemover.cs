@@ -29,6 +29,10 @@ namespace RPG.Cinematics
         private void EnableControl(PlayableDirector pd)
         {
             print("Enabled Control");
+
+            if (playerController == null)
+                return;
+
             playerController.enabled = true;
         }
     }
