@@ -68,6 +68,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6155565200954582099, guid: 6af2286b22aeadc449293fcc684ced50, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 897152083429822703, guid: 37f00639a99b2a441a795b9c5f21716b, type: 3}
+    - target: {fileID: 6155565200954582099, guid: 6af2286b22aeadc449293fcc684ced50, type: 3}
       propertyPath: projectileSpeed
       value: 20
       objectReference: {fileID: 0}
