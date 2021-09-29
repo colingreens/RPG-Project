@@ -7,9 +7,7 @@ using UnityEngine;
 namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
-    {
-        
-
+    {    
         private GameObject instigator;
         private BaseStats baseStats;
         private bool isDead;
@@ -20,6 +18,7 @@ namespace RPG.Attributes
         {
             baseStats = GetComponent<BaseStats>(); 
             experience = GetComponent<BaseStats>().GetStat(StatClass.Xp);
+            baseStats.onLevelUp += AddLevelUpHealth;
 
             if (healthPoints < 0)
                 healthPoints = baseStats.GetStat(StatClass.Health);
@@ -36,6 +35,21 @@ namespace RPG.Attributes
         {
             return (float)Math.Round(healthPoints / baseStats.GetStat(StatClass.Health) * 100f,0);
         }
+          public bool IsDead()
+        {
+            return isDead;
+        }
+
+        public object CaptureState()
+        {
+            return healthPoints;
+        }
+
+        public void RestoreState(object state)
+        {
+            healthPoints = (float)state;
+            CheckForDeath();
+        }
 
         private void CheckForDeath()
         {
@@ -43,8 +57,7 @@ namespace RPG.Attributes
             {
                 AwardExperience(instigator);
                 Die();
-            }
-                
+            }                
         }
 
         private void AwardExperience(GameObject instigator)
@@ -72,20 +85,13 @@ namespace RPG.Attributes
             
         }
 
-        public bool IsDead()
+        private void AddLevelUpHealth()
         {
-            return isDead;
-        }
+            if (GetPercentage() < 70f)
+                healthPoints = baseStats.GetStat(StatClass.Health) * 0.7f;
+            else
+                healthPoints = baseStats.GetStat(StatClass.Health);
 
-        public object CaptureState()
-        {
-            return healthPoints;
-        }
-
-        public void RestoreState(object state)
-        {
-            healthPoints = (float)state;
-            CheckForDeath();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RPG.Stats
@@ -8,9 +9,12 @@ namespace RPG.Stats
         [SerializeField] int startingLevel = 1;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
+        [SerializeField] GameObject levelUpEffect = null;
 
         private int currentLevel = 0;
         private Experience experience = null;
+
+        public event Action onLevelUp;
 
         private void Start() 
         {
@@ -26,14 +30,12 @@ namespace RPG.Stats
             if (newLevel > currentLevel)
             {
                 currentLevel = newLevel;
-                print("Leveled Up!");            
+                LevelUpEffect(); 
+                onLevelUp();           
             }
         }
 
-        public float GetStat(StatClass stat)
-        {
-            return progression.GetStat(characterClass, stat, GetLevel());
-        }
+        public float GetStat(StatClass stat) => progression.GetStat(characterClass, stat, GetLevel());
 
         public int GetLevel()
         {
@@ -57,8 +59,9 @@ namespace RPG.Stats
                 if (currentXP < xpToLevel)
                     return level;                
             }
-
             return penultimateLevel + 1;
         }
+
+        private void LevelUpEffect() => Instantiate(levelUpEffect, transform);
     }
 }

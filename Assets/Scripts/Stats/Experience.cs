@@ -22,8 +22,7 @@ namespace RPG.Stats
         {
             return experiencePoints;
         }
-
-
+        
         public void RestoreState(object state)
         {
             experiencePoints = (float)state;
