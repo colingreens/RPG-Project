@@ -31,8 +31,8 @@ MonoBehaviour:
       - 160
     - statClass: 3
       valuesPerLevel:
-      - 20
-      - 50
+      - 5
+      - 15
       - 100
       - 200
   - Class: 3
