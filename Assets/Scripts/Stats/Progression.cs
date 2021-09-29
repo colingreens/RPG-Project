@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace RPG.Stats
@@ -9,9 +8,51 @@ namespace RPG.Stats
     {
         [SerializeField] List<ProgressionCharacterClass> characterClasses;
 
-        public float GetStat(CharacterClass characterClass, StatClass statClass, int level)
+        private Dictionary<CharacterClass, Dictionary<StatClass, List<float>>> statBook;
+
+        public float GetStat(CharacterClass characterClass, StatClass stat, int level)
         {
-            return characterClasses.Where(x => x.Class == characterClass).First().Stats.Where(y => y.statClass == statClass).First().valuesPerLevel[level];
+            if (ValidateLevel(stat, characterClass, level) == 0)
+                return 0;
+
+            return statBook[characterClass][stat][level - 1];
+        }
+
+        public int GetLevels(StatClass stat, CharacterClass characterClass)
+        {
+            return ValidateLevel(stat, characterClass);
+        }
+
+        private int ValidateLevel(StatClass stat, CharacterClass characterClass, int level = 1)
+        {
+            BuildLookupDictionary();
+
+            var levels = statBook[characterClass][stat];
+
+            if (levels.Count < level)
+                return 0;
+
+            return levels.Count;
+        }
+
+        private void BuildLookupDictionary()
+        {
+            if (statBook != null)
+                return;
+
+            statBook = new Dictionary<CharacterClass, Dictionary<StatClass, List<float>>>();
+
+            foreach (var characterClass in characterClasses)
+            {
+                var statChapter = new Dictionary<StatClass, List<float>>();
+
+                foreach (var stat in characterClass.Stats)
+                {
+                    statChapter.Add(stat.statClass, stat.valuesPerLevel);
+                }
+
+                statBook.Add(characterClass.Class, statChapter);
+            }
         }
 
         [System.Serializable]

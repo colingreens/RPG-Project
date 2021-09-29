@@ -4,6 +4,7 @@
     {
         Health,
         Damage,
-        Xp
+        Xp,
+        XpToLevelUp
     }
 }
