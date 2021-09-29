@@ -10,7 +10,11 @@ namespace RPG.SceneManagement
 
         const string defaultSaveFile = "save";
 
-        private IEnumerator Start()
+        private void Awake() {
+            StartCoroutine(LoadLastScene());
+        }
+
+        private IEnumerator LoadLastScene()
         {
             var fader = FindObjectOfType<Fader>();
             fader.FadeOutImmediate();
