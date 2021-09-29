@@ -8,6 +8,8 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {    
+        [SerializeField] private float levelUpHealthPercentage = 70f;
+
         private GameObject instigator;
         private BaseStats baseStats;
         private bool isDead;
@@ -87,11 +89,8 @@ namespace RPG.Attributes
 
         private void AddLevelUpHealth()
         {
-            if (GetPercentage() < 70f)
-                healthPoints = baseStats.GetStat(StatClass.Health) * 0.7f;
-            else
-                healthPoints = baseStats.GetStat(StatClass.Health);
-
+            var regenHealthPoints = baseStats.GetStat(StatClass.Health) * (levelUpHealthPercentage/100f);
+            healthPoints = Mathf.Max(healthPoints,regenHealthPoints);
         }
     }
 }

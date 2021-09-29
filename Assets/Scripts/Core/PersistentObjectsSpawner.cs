@@ -14,6 +14,7 @@ namespace RPG.Core
                 return;
 
             SpawnPersistenObjects();
+            
             hasSpawned = true;
         }
 
