@@ -1,4 +1,5 @@
-﻿using RPG.Core;
+﻿using RPG.Attributes;
+using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
 using UnityEngine;
@@ -41,17 +42,6 @@ namespace RPG.Combat
             }
         }
 
-        private void AttackBehavior()
-        {
-            transform.LookAt(target.transform);
-            if (timeSinceLastAttack > timeBetweenAttacks)
-            {
-                //this will trigger the hit event
-                TriggerAttack();
-                timeSinceLastAttack = 0;
-            }
-        }
-
         public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null)
@@ -65,24 +55,49 @@ namespace RPG.Combat
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.GetComponent<Health>();
         }
-
-        private bool GetIsInRange()
-        {
-            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.Range ;
-        }      
-
         public void Cancel()
         {
             StopAttack();
             target = null;
         }
 
+        public Health GetTarget()
+        {
+            return target;
+        }
+
         public void EquipWeapon(Weapon weapon)
         {
             currentWeapon = weapon;
             var animator = GetComponent<Animator>();
-            weapon.Spawn(rightHandTransform,leftHandTransform, animator);
+            weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
+
+        public object CaptureState()
+        {
+            return currentWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            EquipWeapon(Resources.Load<Weapon>((string)state));
+        }
+
+        private void AttackBehavior()
+        {
+            transform.LookAt(target.transform);
+            if (timeSinceLastAttack > timeBetweenAttacks)
+            {
+                //this will trigger the hit event
+                TriggerAttack();
+                timeSinceLastAttack = 0;
+            }
+        }        
+
+        private bool GetIsInRange()
+        {
+            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.Range ;
+        }  
 
         private void StopAttack()
         {
@@ -103,24 +118,14 @@ namespace RPG.Combat
                 return;
 
             if (currentWeapon.HasProjectile())
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
             else
-                target.TakeDamage(currentWeapon.Damage);
+                target.TakeDamage(gameObject,currentWeapon.Damage);
         }
 
         void Shoot()
         {
             Hit();
-        }
-
-        public object CaptureState()
-        {
-            return currentWeapon.name;
-        }
-
-        public void RestoreState(object state)
-        {
-            EquipWeapon(Resources.Load<Weapon>((string)state));
-        }
+        }        
     }
 }
