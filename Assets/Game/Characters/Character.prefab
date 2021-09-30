@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2225439134188676974}
   - component: {fileID: 9014868773730746700}
   - component: {fileID: 6683169676326720524}
-  - component: {fileID: 715637718131618334}
   - component: {fileID: 268730753465513428}
   - component: {fileID: 6102299392237879424}
   m_Layer: 0
@@ -176,19 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984c1a45d2d5cc54fb1ad10ea49fd74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &715637718131618334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 110680615584419776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uniqueIdentifier: 
+  levelUpHealthPercentage: 70
 --- !u!54 &268730753465513428
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -221,3 +208,4 @@ MonoBehaviour:
   characterClass: 1
   progression: {fileID: 11400000, guid: 92eacb87ee6f2f14e8a2c59685e3c45a, type: 2}
   levelUpEffect: {fileID: 2390573599029691485, guid: 5b2d68eaa18ba4f4db6c9b505512ec08, type: 3}
+  shouldUseModifiers: 0

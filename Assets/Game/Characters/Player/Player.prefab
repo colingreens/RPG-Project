@@ -26,6 +26,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fd2968b021fec48a421931a60b4300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorMappings:
+  - type: 0
+    texture: {fileID: 2800000, guid: 1c14297d936f92848840a2445a71497e, type: 3}
+    hotSpot: {x: 0, y: 0}
+  - type: 1
+    texture: {fileID: 2800000, guid: 003929a303dfa4a4eb6a26f7b486b737, type: 3}
+    hotSpot: {x: 0, y: 0}
+  - type: 2
+    texture: {fileID: 2800000, guid: 267f629958a691c4eba0ad20da4e9bc4, type: 3}
+    hotSpot: {x: 0, y: 0}
+  - type: 4
+    texture: {fileID: 2800000, guid: 40de43fb047d26540aa6840912807aea, type: 3}
+    hotSpot: {x: 0, y: 0}
+  - type: 5
+    texture: {fileID: 2800000, guid: 4a04a65f86bd76644a4a8a4a8f02ccaf, type: 3}
+    hotSpot: {x: 0, y: 0}
+  - type: 6
+    texture: {fileID: 2800000, guid: 51f1ea0b15d4e6647bba95644443bf9e, type: 3}
+    hotSpot: {x: 0, y: 0}
 --- !u!114 &5582960815223606868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,9 +186,7 @@ PrefabInstance:
       propertyPath: shouldUseModifiers
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6994596565513105209, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
-    - {fileID: 715637718131618334, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
 --- !u!1 &1396703144595882000 stripped
 GameObject:

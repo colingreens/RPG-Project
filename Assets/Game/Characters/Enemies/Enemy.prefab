@@ -11,9 +11,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.9217138
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.4608569, z: 0}
 --- !u!114 &1626429559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +44,19 @@ MonoBehaviour:
   waypointWaitTime: 4
   wayPointTolerance: 1
   patrolSpeedFraction: 0.2
+--- !u!114 &7748395077111099523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047036819571935916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
 --- !u!1001 &3152529329946183020
 PrefabInstance:
   m_ObjectHideFlags: 0
