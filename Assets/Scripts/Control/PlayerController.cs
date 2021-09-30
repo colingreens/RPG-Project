@@ -1,6 +1,7 @@
 using RPG.Attributes;
 using RPG.Combat;
 using RPG.Movement;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -51,12 +52,12 @@ namespace RPG.Control
         public void SetCursor(CursorType type)
         {
             var mapping = GetCursorMapping(type);
-            Cursor.SetCursor(mapping.texture, mapping.hotSpot,CursorMode.Auto);
+            Cursor.SetCursor(mapping.texture, mapping.hotSpot, CursorMode.Auto);
         }
 
         private bool InteractWithComponent()
         {
-            var hits = Physics.RaycastAll(GetMouseRay());
+            var hits = RaycastAllSorted();
             foreach (var hit in hits)
             {
                 var raycastables = hit.transform.GetComponents<IRayCastable>();
@@ -70,6 +71,22 @@ namespace RPG.Control
                 }
             }
             return false;
+        }
+
+        private RaycastHit[] RaycastAllSorted()
+        {
+            var hits = Physics.RaycastAll(GetMouseRay());
+
+            var distances = new float[hits.Length];
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                distances[i] = hits[i].distance;
+            }
+
+            Array.Sort(distances, hits);
+
+            return hits;
         }
 
         private bool InteractWithUI()
