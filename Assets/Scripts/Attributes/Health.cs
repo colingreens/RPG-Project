@@ -17,8 +17,7 @@ namespace RPG.Attributes
         private float healthPoints = -1f;
 
         private void Awake() {
-            baseStats = GetComponent<BaseStats>(); 
-            
+            baseStats = GetComponent<BaseStats>();             
         }
 
         private void Start()
