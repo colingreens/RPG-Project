@@ -4,6 +4,7 @@ using RPG.Movement;
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 namespace RPG.Control
@@ -11,6 +12,7 @@ namespace RPG.Control
     public partial class PlayerController : MonoBehaviour
     {
         [SerializeField] CursorMapping[] cursorMappings = null;
+        [SerializeField] private float maxNavMeshProjectionDistance = 1f;
 
         private Fighter fighter;
         private Health health;
@@ -101,17 +103,14 @@ namespace RPG.Control
 
         private bool InteractWithMovement()
         {
-            var ray = GetMouseRay();
-            var hasHit = Physics.Raycast(ray, out RaycastHit hit);
-
-            //Vector3 target;
-            //var hasHit = RaycastNavMesh(out target);
+            Vector3 target;
+            var hasHit = RaycastNavMesh(out target);
 
             if (hasHit)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Mover>().StartMoveAction(hit.point, 1f);
+                    GetComponent<Mover>().StartMoveAction(target, 1f);
                 }
                 SetCursor(CursorType.Movement);
                 return true;
@@ -122,13 +121,24 @@ namespace RPG.Control
         private bool RaycastNavMesh(out Vector3 target)
         {
             target = new Vector3();
+            var hasHit = Physics.Raycast(GetMouseRay(), out RaycastHit hit);
+
+            if (!hasHit)
+                return false;
+
+            var hasCastToNavMesh = NavMesh.SamplePosition(hit.point, out NavMeshHit navMeshHit,maxNavMeshProjectionDistance, NavMesh.AllAreas);
+
+            if (!hasCastToNavMesh)
+                return false;
+
+            target = navMeshHit.position;
             return true;
         }
 
 
         private CursorMapping GetCursorMapping(CursorType type)
         {
-            return cursorMappings.Where(x => x.type == type).FirstOrDefault();
+            return cursorMappings.FirstOrDefault(x => x.type == type);
         }
 
         private static Ray GetMouseRay()
