@@ -6,21 +6,21 @@ namespace RPG.Combat
 {
     public class EnemyHealthDisplay : MonoBehaviour
     {
-        Fighter health;
-        Text text;
+        private Fighter player;
+        private Text text;
 
         private void Awake()
         {
-            health = GameObject.FindWithTag("Player").GetComponent<Fighter>();
+            player = GameObject.FindWithTag("Player").GetComponent<Fighter>();
             text = GetComponent<Text>();
         }
 
         private void Update()
         {
-            if (health.GetTarget() == null)
+            if (player.GetTarget() == null)
                 text.text = "N/A";
             else
-                text.text = $"{health.GetTarget().GetPercentage()}%";
+                text.text = $"{player.GetTarget().GetHealthPoints()} / {player.GetTarget().GetMaxHealthPoints()}";
 
         }
     }

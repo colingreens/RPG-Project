@@ -16,7 +16,7 @@ namespace RPG.Attributes
 
         private void Update()
         {
-            text.text = $"{health.GetPercentage()}%";
+            text.text = $"{health.GetHealthPoints()} / {health.GetMaxHealthPoints()}";
         }
     }
 }
