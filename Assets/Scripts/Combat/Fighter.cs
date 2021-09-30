@@ -20,13 +20,15 @@ namespace RPG.Combat
         private Weapon currentWeapon = null;
         private BaseStats baseStats = null;
 
+        private void Awake() {            
+
+            baseStats = GetComponent<BaseStats>();
+        }
+
         private void Start()
         {
             if (currentWeapon == null)
                 EquipWeapon(defaultWeapon);
-
-            baseStats = GetComponent<BaseStats>();
-
         }
 
         private void Update()

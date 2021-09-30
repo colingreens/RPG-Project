@@ -16,14 +16,24 @@ namespace RPG.Attributes
         private float experience;
         private float healthPoints = -1f;
 
-        private void Start()
-        {
+        private void Awake() {
             baseStats = GetComponent<BaseStats>(); 
-            experience = GetComponent<BaseStats>().GetStat(StatClass.Xp);
-            baseStats.onLevelUp += AddLevelUpHealth;
+            
+        }
 
+        private void Start()
+        {    
             if (healthPoints < 0)
                 healthPoints = baseStats.GetStat(StatClass.Health);
+
+            experience = baseStats.GetStat(StatClass.Xp); 
+        }
+        private void OnEnable() {
+            baseStats.onLevelUp += AddLevelUpHealth;
+        }
+
+        private void OnDisable() {
+            baseStats.onLevelUp -= AddLevelUpHealth;
         }
 
         public void TakeDamage(GameObject instigator, float damage)
