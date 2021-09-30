@@ -66,7 +66,15 @@ namespace RPG.Stats
 
         private float GetAdditiveModifier(StatClass stat)
         {
-            throw new NotImplementedException();
+            float sum = 0;
+            foreach (var provider in GetComponents<IModifierProvider>())
+            {
+                foreach (var modifier in provider.GetAdditiveModifier(stat))
+                {
+                    sum += modifier;
+                }
+            }
+            return sum;
         }        
     }
 }

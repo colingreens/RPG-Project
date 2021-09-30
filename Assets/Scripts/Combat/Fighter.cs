@@ -1,4 +1,5 @@
-﻿using RPG.Attributes;
+﻿using System.Collections.Generic;
+using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {        
         [SerializeField] private float timeBetweenAttacks = 1f;               
         [SerializeField] private Transform rightHandTransform = null;
@@ -85,6 +86,12 @@ namespace RPG.Combat
         public void RestoreState(object state)
         {
             EquipWeapon(Resources.Load<Weapon>((string)state));
+        }        
+
+        public IEnumerable<float> GetAdditiveModifier(StatClass stat)
+        {
+            if (stat == StatClass.Damage)
+                yield return currentWeapon.Damage;
         }
 
         private void AttackBehavior()
@@ -132,6 +139,6 @@ namespace RPG.Combat
         void Shoot()
         {
             Hit();
-        }        
+        }
     }
 }
