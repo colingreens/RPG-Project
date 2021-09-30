@@ -104,6 +104,9 @@ namespace RPG.Control
             var ray = GetMouseRay();
             var hasHit = Physics.Raycast(ray, out RaycastHit hit);
 
+            //Vector3 target;
+            //var hasHit = RaycastNavMesh(out target);
+
             if (hasHit)
             {
                 if (Input.GetMouseButton(0))
@@ -114,6 +117,12 @@ namespace RPG.Control
                 return true;
             }
             return false;
+        }
+
+        private bool RaycastNavMesh(out Vector3 target)
+        {
+            target = new Vector3();
+            return true;
         }
 
 
