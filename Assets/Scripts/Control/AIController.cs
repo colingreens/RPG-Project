@@ -1,3 +1,4 @@
+using GameDevTV.Utils;
 using RPG.Attributes;
 using RPG.Combat;
 using RPG.Control;
@@ -16,26 +17,32 @@ namespace RPG.Core
         [Range(0,1)]
         [SerializeField] float patrolSpeedFraction = 0.2f;
 
-        Fighter fighter;
-        Health health;
-        Mover mover;
-        GameObject player;
+        private Fighter fighter;
+        private Health health;
+        private Mover mover;
+        private GameObject player;
 
-        Vector3 guardPosition;
-        float timeSinceLastSawPlayer = Mathf.Infinity;
-        int currentWayPointIndex = 0;
-        float timeSinceArrivedInWayPoint = Mathf.Infinity;
+        private LazyValue<Vector3> guardPosition;
+        private float timeSinceLastSawPlayer = Mathf.Infinity;
+        private int currentWayPointIndex = 0;
+        private float timeSinceArrivedInWayPoint = Mathf.Infinity;
 
         private void Awake() {
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
             player = GameObject.FindWithTag("Player");
+            guardPosition = new LazyValue<Vector3>(GetGuardPosition);
         }
 
         private void Start()
-        {    
-            guardPosition = transform.position;
+        {
+            guardPosition.ForceInit();
+        }
+
+        private Vector3 GetGuardPosition()
+        {
+            return transform.position;
         }
 
         private void Update()
@@ -63,7 +70,7 @@ namespace RPG.Core
 
         private void PatrolBehavior()
         {
-            var nextPosition = guardPosition;
+            var nextPosition = guardPosition.value;
             if (patrolPath != null)
             {
                 if (AtWayPoint())

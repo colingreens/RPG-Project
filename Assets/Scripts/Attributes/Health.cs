@@ -1,3 +1,4 @@
+using GameDevTV.Utils;
 using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
@@ -14,16 +15,16 @@ namespace RPG.Attributes
         private BaseStats baseStats;
         private bool isDead;
         private float experience;
-        private float healthPoints = -1f;
+        private LazyValue<float> healthPoints;
 
         private void Awake() {
-            baseStats = GetComponent<BaseStats>();             
+            baseStats = GetComponent<BaseStats>(); 
+            healthPoints = new LazyValue<float>(GetInitialHealth);          
         }
 
         private void Start()
         {    
-            if (healthPoints < 0)
-                healthPoints = baseStats.GetStat(StatClass.Health);
+            healthPoints.ForceInit();
 
             experience = baseStats.GetStat(StatClass.Xp); 
         }
@@ -33,23 +34,27 @@ namespace RPG.Attributes
 
         private void OnDisable() {
             baseStats.onLevelUp -= AddLevelUpHealth;
+
+        }
+        private float GetInitialHealth(){
+            return baseStats.GetStat(StatClass.Health);
         }
 
         public void TakeDamage(GameObject instigator, float damage)
         {
             print(gameObject.name + " took damage: " + damage);
-            healthPoints = Mathf.Max(healthPoints - damage, 0);
+            healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
             this.instigator = instigator;
             CheckForDeath();
         }
 
-        public float GetHealthPoints() => healthPoints;
+        public float GetHealthPoints() => healthPoints.value;
 
         public float GetMaxHealthPoints() => baseStats.GetStat(StatClass.Health);
 
         public float GetPercentage()
         {
-            return (float)Math.Round(healthPoints / baseStats.GetStat(StatClass.Health) * 100f,0);
+            return (float)Math.Round(healthPoints.value / baseStats.GetStat(StatClass.Health) * 100f,0);
         }
           public bool IsDead()
         {
@@ -63,13 +68,13 @@ namespace RPG.Attributes
 
         public void RestoreState(object state)
         {
-            healthPoints = (float)state;
+            healthPoints.value = (float)state;
             CheckForDeath();
         }
 
         private void CheckForDeath()
         {
-            if (healthPoints == 0 && !isDead)
+            if (healthPoints.value == 0 && !isDead)
             {
                 AwardExperience(instigator);
                 Die();
@@ -104,7 +109,7 @@ namespace RPG.Attributes
         private void AddLevelUpHealth()
         {
             var regenHealthPoints = baseStats.GetStat(StatClass.Health) * (levelUpHealthPercentage/100f);
-            healthPoints = Mathf.Max(healthPoints,regenHealthPoints);
+            healthPoints.value = Mathf.Max(healthPoints.value,regenHealthPoints);
         }
     }
 }
