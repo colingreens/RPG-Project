@@ -35,6 +35,12 @@ MonoBehaviour:
       - 15
       - 100
       - 200
+    - statClass: 1
+      valuesPerLevel:
+      - 10
+      - 20
+      - 40
+      - 60
   - Class: 3
     Stats:
     - statClass: 0
@@ -51,6 +57,13 @@ MonoBehaviour:
       - 40
       - 80
       - 160
+    - statClass: 1
+      valuesPerLevel:
+      - 5
+      - 10
+      - 15
+      - 20
+      - 25
   - Class: 1
     Stats:
     - statClass: 0
@@ -67,3 +80,10 @@ MonoBehaviour:
       - 40
       - 80
       - 160
+    - statClass: 1
+      valuesPerLevel:
+      - 10
+      - 20
+      - 30
+      - 40
+      - 50

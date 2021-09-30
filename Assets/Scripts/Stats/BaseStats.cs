@@ -35,7 +35,7 @@ namespace RPG.Stats
             }
         }
 
-        public float GetStat(StatClass stat) => progression.GetStat(characterClass, stat, GetLevel());
+        public float GetStat(StatClass stat) => progression.GetStat(characterClass, stat, GetLevel()) + GetAdditiveModifier(stat);
 
         public int GetLevel()
         {
@@ -45,7 +45,9 @@ namespace RPG.Stats
             return currentLevel;
         }
 
-        public int CalculateLevel()
+        private void LevelUpEffect() => Instantiate(levelUpEffect, transform);
+
+        private int CalculateLevel()
         {            
             if (experience == null) 
                 return startingLevel;
@@ -62,6 +64,9 @@ namespace RPG.Stats
             return penultimateLevel + 1;
         }
 
-        private void LevelUpEffect() => Instantiate(levelUpEffect, transform);
+        private float GetAdditiveModifier(StatClass stat)
+        {
+            throw new NotImplementedException();
+        }        
     }
 }

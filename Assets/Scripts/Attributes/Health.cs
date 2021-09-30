@@ -28,10 +28,15 @@ namespace RPG.Attributes
 
         public void TakeDamage(GameObject instigator, float damage)
         {
+            print(gameObject.name + "took damage: " + damage);
             healthPoints = Mathf.Max(healthPoints - damage, 0);
             this.instigator = instigator;
             CheckForDeath();
         }
+
+        public float GetHealthPoints() => healthPoints;
+
+        public float GetMaxHealthPoints() => baseStats.GetStat(StatClass.Health);
 
         public float GetPercentage()
         {
