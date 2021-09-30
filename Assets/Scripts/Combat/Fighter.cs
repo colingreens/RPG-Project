@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using GameDevTV.Utils;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
@@ -17,18 +19,18 @@ namespace RPG.Combat
 
         private Health target;
         private float timeSinceLastAttack = Mathf.Infinity;
-        private Weapon currentWeapon = null;
+        private LazyValue<Weapon> currentWeapon;
         private BaseStats baseStats = null;
 
         private void Awake() {            
 
             baseStats = GetComponent<BaseStats>();
+            currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
         }
 
         private void Start()
         {
-            if (currentWeapon == null)
-                EquipWeapon(defaultWeapon);
+            currentWeapon.ForceInit();
         }
 
         private void Update()
@@ -47,6 +49,11 @@ namespace RPG.Combat
                 GetComponent<Mover>().Cancel();
                 AttackBehavior();
             }
+        }
+        private Weapon SetupDefaultWeapon()
+        {
+            AttachWeapon(defaultWeapon);
+            return defaultWeapon;
         }
 
         public bool CanAttack(GameObject combatTarget)
@@ -75,14 +82,19 @@ namespace RPG.Combat
 
         public void EquipWeapon(Weapon weapon)
         {
-            currentWeapon = weapon;
+            currentWeapon.value = weapon;
+            AttachWeapon(weapon);
+        }
+
+        private void AttachWeapon(Weapon weapon)
+        {
             var animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
 
         public object CaptureState()
         {
-            return currentWeapon.name;
+            return currentWeapon.value.name;
         }
 
         public void RestoreState(object state)
@@ -93,13 +105,13 @@ namespace RPG.Combat
         public IEnumerable<float> GetAdditiveModifiers(StatClass stat)
         {
             if (stat == StatClass.Damage)
-                yield return currentWeapon.Damage;
+                yield return currentWeapon.value.Damage;
         }
 
         public IEnumerable<float> GetPercentageModifiers(StatClass stat)
         {
             if (stat == StatClass.Damage)
-                yield return currentWeapon.PercentageBonus;
+                yield return currentWeapon.value.PercentageBonus;
         }
 
         private void AttackBehavior()
@@ -115,7 +127,7 @@ namespace RPG.Combat
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.Range ;
+            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.value.Range ;
         }  
 
         private void StopAttack()
@@ -138,8 +150,8 @@ namespace RPG.Combat
 
             float damage = baseStats.GetStat(StatClass.Damage);
 
-            if (currentWeapon.HasProjectile())
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject,damage);
+            if (currentWeapon.value.HasProjectile())
+                currentWeapon.value.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject,damage);
             else
                 target.TakeDamage(gameObject, damage);
         }
