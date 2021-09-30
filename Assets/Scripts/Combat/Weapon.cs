@@ -11,6 +11,7 @@ namespace RPG.Combat
         [SerializeField] private Projectile projectile = null;
         [SerializeField] private float range = 2f;
         [SerializeField] private float damage = 5f;
+        [SerializeField] private float percentageBonus = 0;
         [SerializeField] private bool isRightHanded = true;
 
         const string weaponName = "Weapon";
@@ -18,6 +19,8 @@ namespace RPG.Combat
         public float Damage => damage;
 
         public float Range => range;
+
+        public float PercentageBonus => percentageBonus;
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {

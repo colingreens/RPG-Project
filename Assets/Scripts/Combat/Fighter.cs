@@ -88,10 +88,16 @@ namespace RPG.Combat
             EquipWeapon(Resources.Load<Weapon>((string)state));
         }        
 
-        public IEnumerable<float> GetAdditiveModifier(StatClass stat)
+        public IEnumerable<float> GetAdditiveModifiers(StatClass stat)
         {
             if (stat == StatClass.Damage)
                 yield return currentWeapon.Damage;
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(StatClass stat)
+        {
+            if (stat == StatClass.Damage)
+                yield return currentWeapon.PercentageBonus;
         }
 
         private void AttackBehavior()
@@ -139,6 +145,6 @@ namespace RPG.Combat
         void Shoot()
         {
             Hit();
-        }
+        }        
     }
 }

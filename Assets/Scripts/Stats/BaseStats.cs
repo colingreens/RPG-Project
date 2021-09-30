@@ -5,22 +5,23 @@ namespace RPG.Stats
 {
     public class BaseStats : MonoBehaviour
     {
-        [Range(1,99)]
+        [Range(1, 99)]
         [SerializeField] int startingLevel = 1;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
         [SerializeField] GameObject levelUpEffect = null;
+        [SerializeField] private bool shouldUseModifiers = false;
 
         private int currentLevel = 0;
         private Experience experience = null;
 
         public event Action onLevelUp;
 
-        private void Start() 
+        private void Start()
         {
             currentLevel = GetLevel();
             experience = GetComponent<Experience>();
-            if (experience != null) 
+            if (experience != null)
                 experience.onExperienceGained += UpdateLevel;
         }
 
@@ -30,26 +31,26 @@ namespace RPG.Stats
             if (newLevel > currentLevel)
             {
                 currentLevel = newLevel;
-                LevelUpEffect(); 
-                onLevelUp();           
+                LevelUpEffect();
+                onLevelUp();
             }
         }
 
-        public float GetStat(StatClass stat) => progression.GetStat(characterClass, stat, GetLevel()) + GetAdditiveModifier(stat);
+        public float GetStat(StatClass stat) => GetBaseStat(stat) + GetAdditiveModifier(stat) * (1f + GetPercentageModifier(stat))/100f;
 
         public int GetLevel()
         {
             if (currentLevel < 1)
                 currentLevel = CalculateLevel();
-                
+
             return currentLevel;
         }
 
         private void LevelUpEffect() => Instantiate(levelUpEffect, transform);
 
         private int CalculateLevel()
-        {            
-            if (experience == null) 
+        {
+            if (experience == null)
                 return startingLevel;
 
             var currentXP = experience.ExperiencePoints;
@@ -59,22 +60,44 @@ namespace RPG.Stats
             {
                 var xpToLevel = progression.GetStat(characterClass, StatClass.XpToLevelUp, level);
                 if (currentXP < xpToLevel)
-                    return level;                
+                    return level;
             }
             return penultimateLevel + 1;
         }
 
         private float GetAdditiveModifier(StatClass stat)
         {
+            if (!shouldUseModifiers) return 0;
+
             float sum = 0;
             foreach (var provider in GetComponents<IModifierProvider>())
             {
-                foreach (var modifier in provider.GetAdditiveModifier(stat))
+                foreach (var modifier in provider.GetAdditiveModifiers(stat))
                 {
                     sum += modifier;
                 }
             }
             return sum;
-        }        
+        }
+
+        private float GetPercentageModifier(StatClass stat)
+        {
+            if (!shouldUseModifiers) return 0;
+            
+            float sum = 0;
+            foreach (var provider in GetComponents<IModifierProvider>())
+            {
+                foreach (var modifier in provider.GetPercentageModifiers(stat))
+                {
+                    sum += modifier;
+                }
+            }
+            return sum;
+        }
+
+        private float GetBaseStat(StatClass stat)
+        {
+            return progression.GetStat(characterClass, stat, GetLevel());
+        }
     }
 }

@@ -163,6 +163,10 @@ PrefabInstance:
       propertyPath: characterClass
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6102299392237879424, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
+      propertyPath: shouldUseModifiers
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6994596565513105209, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
     - {fileID: 715637718131618334, guid: 2394ef97584a7564796be10df6ee2d4b, type: 3}
