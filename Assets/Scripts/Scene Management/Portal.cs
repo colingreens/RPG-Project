@@ -1,3 +1,4 @@
+using RPG.Control;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,11 +20,17 @@ namespace RPG.SceneManagement
         [SerializeField] Transform spawnPoint;
         [SerializeField] DestinationIdentifier destination;
 
+        private PlayerController player;
+
+        private void Awake()
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player")
                 StartCoroutine(Transition());
-
         }
 
         private IEnumerator Transition()
@@ -35,24 +42,24 @@ namespace RPG.SceneManagement
             }
             
             DontDestroyOnLoad(gameObject);
-
             var fader = FindObjectOfType<Fader>();
+            var saver = FindObjectOfType<SavingWrapper>();
+            player.enabled = false;
 
             yield return fader.FadeOut(fadeOutTime);
-
-             var saver = FindObjectOfType<SavingWrapper>();
-
             saver.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
-
-             saver.Load();
+            var newPlayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
+            saver.Load();
 
             var otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
+            newPlayerController.enabled = enabled;
 
             saver.Save();
 
