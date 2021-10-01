@@ -4,12 +4,14 @@ using RPG.Saving;
 using RPG.Stats;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {    
         [SerializeField] private float levelUpHealthPercentage = 70f;
+        [SerializeField] private TakeDamageEvent takeDamage;
 
         private GameObject instigator;
         private BaseStats baseStats;
@@ -42,8 +44,10 @@ namespace RPG.Attributes
 
         public void TakeDamage(GameObject instigator, float damage)
         {
+            damage = Mathf.Round(damage);
             print(gameObject.name + " took damage: " + damage);
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
+            takeDamage.Invoke(damage);
             this.instigator = instigator;
             CheckForDeath();
         }
@@ -54,7 +58,12 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return (float)Math.Round(healthPoints.value / baseStats.GetStat(StatClass.Health) * 100f,0);
+            return Mathf.Round(GetFraction() * 100f);
+        }
+
+        public float GetFraction()
+        {
+            return healthPoints.value / baseStats.GetStat(StatClass.Health);
         }
           public bool IsDead()
         {
@@ -78,7 +87,11 @@ namespace RPG.Attributes
             {
                 AwardExperience(instigator);
                 Die();
-            }                
+            }
+            //else
+            //{
+            //    takeDamage.Invoke(); commenting out because I dont want to pass damage down here or move this back into the TakeDamage()
+            //}
         }
 
         private void AwardExperience(GameObject instigator)
@@ -110,6 +123,12 @@ namespace RPG.Attributes
         {
             var regenHealthPoints = baseStats.GetStat(StatClass.Health) * (levelUpHealthPercentage/100f);
             healthPoints.value = Mathf.Max(healthPoints.value,regenHealthPoints);
+        }
+
+        [Serializable]
+        public class TakeDamageEvent : UnityEvent<float>
+        {
+
         }
     }
 }
