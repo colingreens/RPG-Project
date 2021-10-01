@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: defaultWeaponName
       value: Bow Red Arrows
       objectReference: {fileID: 0}
+    - target: {fileID: 3828712393771377154, guid: 048808b302ca24b47be42723fd106177, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 0101e763ad188f84ca89f4f4ca42b38e, type: 2}
     - target: {fileID: 7122442308062541583, guid: 048808b302ca24b47be42723fd106177, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
