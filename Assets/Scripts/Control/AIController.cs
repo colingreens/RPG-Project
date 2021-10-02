@@ -9,6 +9,7 @@ namespace RPG.Core
 {
     public class AIController : MonoBehaviour
     {
+        [SerializeField] float aggrevatedTime = 4f;
         [SerializeField] float chasedistance = 5f;
         [SerializeField] float suspicionTime = 5f;
         [SerializeField] PatrolPath patrolPath;
@@ -26,6 +27,7 @@ namespace RPG.Core
         private float timeSinceLastSawPlayer = Mathf.Infinity;
         private int currentWayPointIndex = 0;
         private float timeSinceArrivedInWayPoint = Mathf.Infinity;
+        private float timeSinceAggrevated = Mathf.Infinity;
 
         private void Awake() {
             fighter = GetComponent<Fighter>();
@@ -50,7 +52,7 @@ namespace RPG.Core
             if (health.IsDead())
                 return;
 
-            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
+            if (IsAggrevated() && fighter.CanAttack(player))
                 AttackBehavior();
 
             else if (timeSinceLastSawPlayer < suspicionTime)
@@ -62,10 +64,16 @@ namespace RPG.Core
             UpdateTimers();
         }
 
+        public void Aggrevate()
+        {
+            timeSinceAggrevated = 0f;
+        }
+
         private void UpdateTimers()
         {
             timeSinceLastSawPlayer += Time.deltaTime;
             timeSinceArrivedInWayPoint += Time.deltaTime;
+            timeSinceAggrevated += Time.deltaTime;
         }
 
         private void PatrolBehavior()
@@ -113,9 +121,10 @@ namespace RPG.Core
             fighter.Attack(player);
         }
 
-        private bool InAttackRangeOfPlayer()
+        private bool IsAggrevated()
         {
-            return Vector3.Distance(transform.position, player.transform.position) < chasedistance;
+            return Vector3.Distance(transform.position, player.transform.position) < chasedistance ||
+                timeSinceAggrevated < aggrevatedTime;
         }
 
         //Called by Unity
