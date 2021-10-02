@@ -61,6 +61,10 @@ namespace RPG.Combat
         {
             if (combatTarget == null)
                 return false;
+
+            if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position))
+                return false;
+
             var targetToTest = combatTarget.GetComponent<Health>();
             return targetToTest != null && !targetToTest.IsDead();
         }
