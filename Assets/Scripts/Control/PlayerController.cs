@@ -13,6 +13,7 @@ namespace RPG.Control
     {
         [SerializeField] private CursorMapping[] cursorMappings = null;
         [SerializeField] private float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] private float raycastRadius = 1f;
 
         private Fighter fighter;
         private Health health;
@@ -79,7 +80,7 @@ namespace RPG.Control
 
         private RaycastHit[] RaycastAllSorted()
         {
-            var hits = Physics.RaycastAll(GetMouseRay());
+            var hits = Physics.SphereCastAll(GetMouseRay(), raycastRadius);
 
             var distances = new float[hits.Length];
 

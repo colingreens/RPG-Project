@@ -10,6 +10,7 @@ namespace RPG.Core
     public class AIController : MonoBehaviour
     {
         [SerializeField] float aggrevatedTime = 4f;
+        [SerializeField] float shoutDistance = 5f;
         [SerializeField] float chasedistance = 5f;
         [SerializeField] float suspicionTime = 5f;
         [SerializeField] PatrolPath patrolPath;
@@ -119,6 +120,21 @@ namespace RPG.Core
         {
             timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
+
+            AggrevateNearbyEnemies();
+        }
+
+        private void AggrevateNearbyEnemies()
+        {
+            var hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+            foreach (var hit in hits)
+            {
+                var ai = hit.collider.GetComponent<AIController>();
+                if (ai == null)
+                    continue;
+
+                ai.Aggrevate();
+            }
         }
 
         private bool IsAggrevated()
