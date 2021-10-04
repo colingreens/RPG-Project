@@ -12,5 +12,14 @@ namespace RPG.UI.Inventory
 
         public InventoryItem item;
         [Min(1)] public int quantity;
+
+        public static bool operator ==(ItemSlot a, ItemSlot b)
+        {
+            return a.Equals(b);
+        }
+        public static bool operator !=(ItemSlot a, ItemSlot b)
+        {
+            return !a.Equals(b);
+        }
     }
 }
