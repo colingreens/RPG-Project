@@ -39,20 +39,20 @@ namespace RPG.UI.Inventory
 
             for (int i = 0; i < itemSlots.Length; i++)
             {
-                if (itemSlots[i].item == null)
+                if (itemSlots[i].item != null)
+                    continue;
+
+                if (itemSlot.quantity <= itemSlot.item.MaxStack)
                 {
-                    if (itemSlot.quantity <= itemSlot.item.MaxStack)
-                    {
-                        itemSlots[i] = itemSlot;
-                        itemSlot.quantity = 0;
+                    itemSlots[i] = itemSlot;
+                    itemSlot.quantity = 0;
 
-                        OnItemsUpdated.Invoke();
-                        return itemSlot;
-                    }
-
-                    itemSlots[i] = new ItemSlot(itemSlot.item, itemSlot.item.MaxStack);
-                    itemSlot.quantity -= itemSlot.item.MaxStack;
+                    OnItemsUpdated.Invoke();
+                    return itemSlot;
                 }
+
+                itemSlots[i] = new ItemSlot(itemSlot.item, itemSlot.item.MaxStack);
+                itemSlot.quantity -= itemSlot.item.MaxStack;
             }
 
             OnItemsUpdated.Invoke();
