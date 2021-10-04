@@ -151,5 +151,10 @@ namespace RPG.Control
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
+
+        public GameObject GetGameObject()
+        {
+            return gameObject;
+        }
     }
 }
