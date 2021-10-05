@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace RPG.UI.Inventory
 {
+    [CreateAssetMenu(fileName = "New Inventory", menuName = "Items/Inventory")]
     public class Inventory : ScriptableObject
     {
         [SerializeField] private VoidEvent onInventoryItemsUpdated = null;
