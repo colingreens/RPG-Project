@@ -10,6 +10,8 @@ namespace RPG.UI.Inventory
 
         private ItemSlot[] itemSlots = new ItemSlot[20];
 
+        public ItemSlot GetSlotByIndex(int index) => itemSlots[index];
+
         public ItemSlot AddItem(ItemSlot itemSlot)
         {
             for (int i = 0; i < itemSlots.Length; i++)
