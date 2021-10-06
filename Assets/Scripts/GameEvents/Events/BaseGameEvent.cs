@@ -1,3 +1,4 @@
+using RPG.GameEvents.Listeners;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace RPG.GameEvents
                 eventListeners.Add((listener));
         }
 
-        public void UnregisterListener(IGameEventListener<T> listener)
+        public void UnregisterListener(IGameEventListener<T> listener) 
         {
             if (eventListeners.Contains(listener))
                 eventListeners.Remove((listener));

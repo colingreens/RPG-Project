@@ -1,3 +1,4 @@
+using RPG.GameEvents.Events;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,6 +8,8 @@ namespace RPG.UI.Inventory
     public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected ItemSlotUI itemSlotUI = null;
+        [SerializeField] protected HotbarItemEvent onMouseStartHoverItem = null;
+        [SerializeField] protected VoidEvent onMouseEndHoverItem = null;
 
         private CanvasGroup canvasGroup = null;
         private Transform originalParent = null;
@@ -24,7 +27,7 @@ namespace RPG.UI.Inventory
         {
             if (isHovering)
             {
-                //raise event
+                onMouseEndHoverItem.Raise();
                 isHovering = false;
             }
         }
@@ -33,7 +36,7 @@ namespace RPG.UI.Inventory
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                //raise event
+                onMouseEndHoverItem.Raise();
 
                 originalParent = transform.parent;
                 transform.SetParent((transform.parent.parent));
@@ -60,13 +63,13 @@ namespace RPG.UI.Inventory
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            //raise event
+            onMouseStartHoverItem.Raise(ItemSlotUI.SlotItem);
             isHovering = true;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            //raise event
+            onMouseEndHoverItem.Raise();
             isHovering = false;
         }
     }

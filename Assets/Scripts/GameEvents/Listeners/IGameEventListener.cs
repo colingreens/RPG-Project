@@ -1,4 +1,4 @@
-﻿namespace RPG.GameEvents
+﻿namespace RPG.GameEvents.Listeners
 {
     public interface IGameEventListener<T>
     {
