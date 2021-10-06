@@ -6,6 +6,9 @@ namespace RPG.UI.Inventory
 {
     public class InventorySlot : ItemSlotUI, IDropHandler
     {
+        [SerializeField] private Inventory inventory = null;
+        [SerializeField] private TextMeshProUGUI itemQualityText = null;
+
         public override HotBarItem SlotItem
         {
             get => ItemSlot.item;
@@ -46,9 +49,6 @@ namespace RPG.UI.Inventory
             itemQualityText.enabled = enable;
         }
 
-        [SerializeField]
-        private readonly Inventory inventory = null;
-        [SerializeField]
-        private readonly TextMeshProUGUI itemQualityText = null;
+        
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace RPG.UI.Inventory
 {
+    [CreateAssetMenu(fileName = "New Consumable", menuName = "Items/Consumable")]
     public class ConsumableItem : InventoryItem
     {
         [Header("Consumable Data")]
