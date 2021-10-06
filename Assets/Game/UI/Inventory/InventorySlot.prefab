@@ -245,6 +245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSlotUI: {fileID: -5752454012830533223}
+  itemDestroyer: {fileID: 0}
+  playerController: {fileID: 136600846537399783, guid: b0e40f62c8381934fbf3710aa6d415f0, type: 3}
 --- !u!1 &5197555616246590096
 GameObject:
   m_ObjectHideFlags: 0
