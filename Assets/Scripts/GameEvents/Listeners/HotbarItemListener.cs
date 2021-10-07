@@ -1,6 +1,6 @@
 using RPG.GameEvents.Events;
 using RPG.GameEvents.UnityEvents;
-using RPG.UI.Inventory;
+using RPG.UI.Hotbars;
 
 namespace RPG.GameEvents.Listeners
 {

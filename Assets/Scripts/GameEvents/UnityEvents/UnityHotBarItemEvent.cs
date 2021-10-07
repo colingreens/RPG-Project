@@ -1,5 +1,4 @@
-using RPG.UI.Inventory;
-using UnityEngine;
+using RPG.UI.Hotbars;
 using UnityEngine.Events;
 
 namespace RPG.GameEvents.UnityEvents

@@ -1,3 +1,4 @@
+using RPG.UI.Hotbars;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

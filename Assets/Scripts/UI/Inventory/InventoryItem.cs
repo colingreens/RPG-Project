@@ -1,3 +1,4 @@
+using RPG.UI.Hotbars;
 using UnityEngine;
 
 namespace RPG.UI.Inventory

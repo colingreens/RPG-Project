@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Hotbars
 {
     public abstract class HotBarItem : ScriptableObject
     {

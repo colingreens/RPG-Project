@@ -1,3 +1,4 @@
+using RPG.UI.Hotbars;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
