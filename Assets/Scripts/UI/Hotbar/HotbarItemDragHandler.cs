@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using RPG.UI.Inventories;
+using UnityEngine.EventSystems;
 
-public class HotbarItemDragHandler : MonoBehaviour
+namespace  RPG.UI.Hotbars
 {
-    // Start is called before the first frame update
-    void Start()
+    public class HotbarItemDragHandler : ItemDragHandler
     {
-        
-    }
+        public override void OnPointerUp(PointerEventData eventData)
+        {            
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                base.OnPointerUp(eventData);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+                if (eventData.hovered.Count == 0)
+                {
+                    (ItemSlotUI as HotbarSlot).SlotItem = null;
+                }
+            }
+        }
     }
 }

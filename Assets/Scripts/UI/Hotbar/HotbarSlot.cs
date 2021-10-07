@@ -9,6 +9,7 @@ namespace RPG.UI.Hotbars
     {
         [SerializeField] private Inventory inventory = null;
         [SerializeField] private TextMeshProUGUI itemQuantityText = null;
+        //set cooldown for abilities
 
         private HotBarItem slotItem = null;
 
@@ -16,7 +17,25 @@ namespace RPG.UI.Hotbars
 
         public override void OnDrop(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            var itemDragHandler = eventData.pointerDrag.GetComponent<ItemDragHandler>();
+            if (itemDragHandler == null)
+                return;
+
+            var inventorySlot = itemDragHandler.ItemSlotUI as InventorySlot;
+            if (inventorySlot != null)
+            {
+                SlotItem = inventorySlot.ItemSlot.item;
+                return;
+            }
+
+            var hotbarSlot = itemDragHandler.ItemSlotUI as HotbarSlot;
+            if (inventorySlot != null)
+            {
+                var oldItem = SlotItem;
+                SlotItem = hotbarSlot.SlotItem;
+                hotbarSlot.SlotItem = oldItem;
+                return;
+            }
         }
 
         public bool AddItem(HotBarItem itemToAdd)
@@ -28,9 +47,53 @@ namespace RPG.UI.Hotbars
             return true;
         }
 
+        public void UseSlot(int index)
+        {
+            if (index != SlotIndex)
+                return;
+
+            //use item
+        }
+
         public override void UpdateSlotUI()
         {
-            throw new System.NotImplementedException();
+            if (SlotItem == null)
+            {
+                EnableSlotUI(false);
+                return;
+            }
+
+            itemIconImage.sprite = SlotItem.Icon;
+            EnableSlotUI(true);
+
+            SetItemQuantity();
+            //update cooldown
+        }
+
+        protected override void EnableSlotUI(bool enable)
+        {
+            base.EnableSlotUI(enable);
+            itemQuantityText.enabled = enable;
+        }
+
+        private void SetItemQuantity()
+        {
+            if (SlotItem is InventoryItem inventoryItem)
+            {
+                if (inventory.ItemContainer.HasItem(inventoryItem))
+                {
+                    var quantityCount = inventory.ItemContainer.GetTotalQuantity(inventoryItem);
+                    itemQuantityText.text = quantityCount > 1 ? quantityCount.ToString() : "";
+                }
+                else
+                {
+                    SlotItem = null;
+                }
+            }
+            else 
+            {
+                itemQuantityText.enabled = false;
+            }
         }
     }
 }
