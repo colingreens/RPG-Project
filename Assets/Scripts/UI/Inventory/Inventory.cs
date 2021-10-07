@@ -25,6 +25,15 @@ namespace RPG.UI.Inventories
             ItemContainer.OnItemsUpdated -= onInventoryItemsUpdated.Raise;
         }
 
+        public void AddItem(InventoryItem item)
+        {
+            ItemContainer.AddItem(new ItemSlot
+            {
+                item = item,
+                quantity = 1
+            });
+        }
+
         [ContextMenu("Test Add")]
         public void TestAdd()
         {

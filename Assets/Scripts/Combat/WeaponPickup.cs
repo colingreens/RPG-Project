@@ -15,13 +15,14 @@ namespace RPG.Combat
             if (other.tag == "Player")
             {
                 if (Input.GetKeyDown(KeyCode.LeftShift))
-                    Pickup(other.GetComponent<Fighter>());
+                    Pickup(other.GetComponent<InventoryHandler>());
             }
         }
 
-        private void Pickup(Fighter fighter)
+        private void Pickup(InventoryHandler inventory)
         {
-            fighter.EquipWeapon(weapon);
+            //fighter.EquipWeapon(weapon);
+            inventory.AddToInventory(weapon);
             StartCoroutine(HideForSeconds(respawnTime));
         }
 
@@ -44,7 +45,7 @@ namespace RPG.Combat
         public bool HandleRaycast(PlayerController callingController)
         {
             if (Input.GetMouseButtonDown(0))
-                Pickup(callingController.GetComponent<Fighter>());
+                Pickup(callingController.GetComponent<InventoryHandler>());
             return true;
         }
 
