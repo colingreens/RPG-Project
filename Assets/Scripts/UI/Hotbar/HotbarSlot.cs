@@ -66,7 +66,7 @@ namespace RPG.UI.Hotbars
             itemIconImage.sprite = SlotItem.Icon;
             EnableSlotUI(true);
 
-            SetItemQuantity();
+            SetItemQuantityUI();
             //update cooldown
         }
 
@@ -76,7 +76,7 @@ namespace RPG.UI.Hotbars
             itemQuantityText.enabled = enable;
         }
 
-        private void SetItemQuantity()
+        private void SetItemQuantityUI()
         {
             if (SlotItem is InventoryItem inventoryItem)
             {

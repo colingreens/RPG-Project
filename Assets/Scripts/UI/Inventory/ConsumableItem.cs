@@ -13,6 +13,7 @@ namespace RPG.UI.Inventories
         public override string GetInfoDisplayText()
         {
             var builder = new StringBuilder();
+            builder.Append(Rarity.Name).AppendLine();
             builder.Append("<color=green>Use: ").Append(useText).Append("</color>").AppendLine();
             builder.Append("Max Stack: ").Append(MaxStack).AppendLine();
             builder.Append("Sell Price: ").Append(SellPrice).Append(" Gold");
