@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     public class InventorySlot : ItemSlotUI, IDropHandler
     {

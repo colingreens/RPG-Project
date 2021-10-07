@@ -1,7 +1,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     [CreateAssetMenu(fileName = "New Consumable", menuName = "Items/Consumable")]
     public class ConsumableItem : InventoryItem

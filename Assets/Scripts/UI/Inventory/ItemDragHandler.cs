@@ -2,7 +2,7 @@ using RPG.GameEvents.Events;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler

@@ -1,4 +1,4 @@
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     public interface IItemContainer
     {

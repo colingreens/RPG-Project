@@ -1,7 +1,7 @@
 using RPG.GameEvents.Events;
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     [CreateAssetMenu(fileName = "New Inventory", menuName = "Items/Inventory")]
     public class Inventory : ScriptableObject

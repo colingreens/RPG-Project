@@ -2,7 +2,7 @@
 using UnityEngine;
 using RPG.Control;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     public class InventoryItemDragHandler : ItemDragHandler
     {

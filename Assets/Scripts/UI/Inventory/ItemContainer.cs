@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     [Serializable]
     public class ItemContainer : IItemContainer

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     public abstract class ItemSlotUI : MonoBehaviour, IDropHandler
     {

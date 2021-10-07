@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     public class ItemDestroyer : MonoBehaviour
     {

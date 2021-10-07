@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     public class HoverInfoPopup : MonoBehaviour
     {

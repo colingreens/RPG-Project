@@ -1,7 +1,7 @@
 using RPG.UI.Hotbars;
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     public abstract class InventoryItem : HotBarItem
     {
