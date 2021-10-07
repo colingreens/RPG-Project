@@ -29,7 +29,7 @@ namespace RPG.UI.Hotbars
             }
 
             var hotbarSlot = itemDragHandler.ItemSlotUI as HotbarSlot;
-            if (inventorySlot != null)
+            if (hotbarSlot != null)
             {
                 var oldItem = SlotItem;
                 SlotItem = hotbarSlot.SlotItem;

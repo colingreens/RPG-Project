@@ -1,11 +1,15 @@
 using RPG.Attributes;
+using RPG.UI.Inventories;
+using System.Text;
 using UnityEngine;
 
 namespace RPG.Combat
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
-    public class WeaponConfig : ScriptableObject
+    public class WeaponConfig : InventoryItem
     {
+        [Header("Consumable Data")]
+        [SerializeField] private string useText = "Weapon Description";
         [SerializeField] private AnimatorOverrideController animatorOverride = null;
         [SerializeField] private Weapon equippedPrefab = null;
         [SerializeField] private Projectile projectile = null;
@@ -21,6 +25,17 @@ namespace RPG.Combat
         public float Range => range;
 
         public float PercentageBonus => percentageBonus;
+
+        public override string GetInfoDisplayText()
+        {
+            var builder = new StringBuilder();
+            builder.Append(Rarity.Name).AppendLine();
+            builder.Append("<color=red>Use: ").Append(useText).Append("</color>").AppendLine();
+            builder.Append("Max Stack: ").Append(MaxStack).AppendLine();
+            builder.Append("Sell Price: ").Append(SellPrice).Append(" Gold");
+
+            return builder.ToString();
+        }
 
         public Weapon Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {

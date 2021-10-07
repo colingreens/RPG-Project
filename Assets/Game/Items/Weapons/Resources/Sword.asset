@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c3cc28fa1ead54499f4fbc5856ce2f, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  name: Basic Sword
+  icon: {fileID: 21300000, guid: d19901b0ee3c38743a7d383bd484b0b5, type: 3}
+  rarity: {fileID: 11400000, guid: 17c963e7799cd224d8f19784c922a222, type: 2}
+  sellPrice: 1
+  maxStack: 1
+  useText: Starting Sword Bro
   animatorOverride: {fileID: 22100000, guid: cd7ce25b44f31a54db25e00078c57261, type: 2}
   equippedPrefab: {fileID: 4665541973588512169, guid: 649966b3838639e419844807d9e1773b, type: 3}
   projectile: {fileID: 0}
