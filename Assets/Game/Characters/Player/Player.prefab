@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 137f22f077192bf47b265096b15d5efe, type: 2}
+  weapon: {fileID: 0}
 --- !u!114 &7608751809209377276
 MonoBehaviour:
   m_ObjectHideFlags: 0

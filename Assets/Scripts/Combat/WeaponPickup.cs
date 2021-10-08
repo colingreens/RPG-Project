@@ -21,7 +21,6 @@ namespace RPG.Combat
 
         private void Pickup(InventoryHandler inventory)
         {
-            //fighter.EquipWeapon(weapon);
             inventory.AddToInventory(weapon);
             StartCoroutine(HideForSeconds(respawnTime));
         }

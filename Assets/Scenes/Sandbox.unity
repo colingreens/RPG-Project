@@ -182,7 +182,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35902441}
-  m_LocalRotation: {x: 0.17839846, y: -0.4360042, z: 0.08862874, w: 0.8776214}
+  m_LocalRotation: {x: 0.17839848, y: -0.43600416, z: 0.08862874, w: 0.8776214}
   m_LocalPosition: {x: -5.277788, y: -0.89073277, z: 43.819126}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -321,7 +321,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92906061}
-  m_LocalRotation: {x: 0.22415496, y: 0.56441617, z: -0.16269371, w: 0.7776373}
+  m_LocalRotation: {x: 0.22415495, y: 0.56441617, z: -0.16269372, w: 0.7776373}
   m_LocalPosition: {x: 8.902212, y: 13.299267, z: 92.34913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -761,6 +761,10 @@ PrefabInstance:
       propertyPath: defaultWeaponName
       value: Unarmed
       objectReference: {fileID: 0}
+    - target: {fileID: 2883410617616660805, guid: 46b512b85a2e3d242b7182367f0a03c1, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 88aef174b3e302347a74678777610f8a, type: 2}
     - target: {fileID: 3779294526880083375, guid: 46b512b85a2e3d242b7182367f0a03c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.48164368
@@ -4226,6 +4230,10 @@ PrefabInstance:
     - target: {fileID: 3037162584994074465, guid: 9a0258940b1f78949b418271c630c808, type: 3}
       propertyPath: m_Name
       value: InventoryUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3037162586643525768, guid: 9a0258940b1f78949b418271c630c808, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.523407
       objectReference: {fileID: 0}
     - target: {fileID: 3609301447856445553, guid: 9a0258940b1f78949b418271c630c808, type: 3}
       propertyPath: m_AnchorMax.y
