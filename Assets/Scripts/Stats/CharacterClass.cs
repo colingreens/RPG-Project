@@ -5,6 +5,9 @@
         Player,
         Grunt,
         Mage,
-        Archer
+        Archer,
+        Warlock,
+        Shaman,
+        Warrior
     }
 }
