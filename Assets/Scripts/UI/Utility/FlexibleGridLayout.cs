@@ -54,11 +54,9 @@ namespace RPG.UI.Utility
 
             var cellWidth = (parentWidth / (float)columns) - ((spacing.x / (float)columns) * (columns - 1)) - (padding.left / (float)columns) - (padding.right / (float)columns);
             var cellHeight = (parentHeight / (float)rows) - ((spacing.y / (float)rows) * 2) - (padding.top / (float)rows) - (padding.bottom / (float)rows);
-            print("Cell Height  " + cellHeight);
 
             cellSize.x = fitX ? cellWidth : cellSize.x;
             cellSize.y = fitY ? cellHeight : cellSize.y;
-            print("Cell Sixe.Y  " + cellSize.y);
 
             var columnCount = 0;
             var rowCount = 0;
@@ -67,7 +65,6 @@ namespace RPG.UI.Utility
             {
                 rowCount = i / columns;
                 columnCount = i % columns;
-                print("Row Count:  " + rowCount);
 
                 var item = rectChildren[i];
 
