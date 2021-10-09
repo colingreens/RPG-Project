@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c3cc28fa1ead54499f4fbc5856ce2f, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
+  name: Fireball
+  icon: {fileID: 21300000, guid: a1ec2c0ddc0da634b85f0f465fec2d0d, type: 3}
+  rarity: {fileID: 11400000, guid: a3837d412b2e98749aba83f05674ccae, type: 2}
+  sellPrice: 10
+  maxStack: 1
+  useText: Weapon Description
   animatorOverride: {fileID: 22100000, guid: 4b852e1e99a1dd64fbdd64dd3d3b83e8, type: 2}
   equippedPrefab: {fileID: 0}
   projectile: {fileID: 5811412883457379591, guid: 1efc08b7c17a3734daf2ac33d25fff97, type: 3}

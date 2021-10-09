@@ -7,9 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 579588831502517695, guid: c0100a85093af8443bb1e628d4d95d47, type: 3}
+      propertyPath: m_Volume
+      value: 0.263
+      objectReference: {fileID: 0}
     - target: {fileID: 2770696632306751093, guid: c0100a85093af8443bb1e628d4d95d47, type: 3}
       propertyPath: m_Name
       value: ArrowProjectile - RedTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621443876092208300, guid: c0100a85093af8443bb1e628d4d95d47, type: 3}
+      propertyPath: m_Volume
+      value: 0.263
       objectReference: {fileID: 0}
     - target: {fileID: 8125148350586938443, guid: c0100a85093af8443bb1e628d4d95d47, type: 3}
       propertyPath: m_RootOrder

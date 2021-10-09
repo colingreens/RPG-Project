@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c3cc28fa1ead54499f4fbc5856ce2f, type: 3}
   m_Name: Bow Red Arrows
   m_EditorClassIdentifier: 
+  name: New Hotbar Item Name
+  icon: {fileID: 21300000, guid: dbef0a76fe3974542888e09e324d1836, type: 3}
+  rarity: {fileID: 11400000, guid: 652928759bfbde948ba91b583b22c8c3, type: 2}
+  sellPrice: 1
+  maxStack: 1
+  useText: Bow But Red
   animatorOverride: {fileID: 22100000, guid: f37ed20f335a0b543a5a9eb9e3eebc9f, type: 2}
   equippedPrefab: {fileID: 6405651668420031676, guid: 30f6a82b2f7836142a6e57fe9e95c581, type: 3}
   projectile: {fileID: 6155565200954582099, guid: 6af2286b22aeadc449293fcc684ced50, type: 3}

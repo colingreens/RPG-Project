@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c3cc28fa1ead54499f4fbc5856ce2f, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
+  name: Basic Bow
+  icon: {fileID: 21300000, guid: 56113d77198ca4e7db0a78aab2221a77, type: 3}
+  rarity: {fileID: 11400000, guid: 17c963e7799cd224d8f19784c922a222, type: 2}
+  sellPrice: 5
+  maxStack: 1
+  useText: Yeoman Bow
   animatorOverride: {fileID: 22100000, guid: f37ed20f335a0b543a5a9eb9e3eebc9f, type: 2}
   equippedPrefab: {fileID: 6405651668420031676, guid: 30f6a82b2f7836142a6e57fe9e95c581, type: 3}
   projectile: {fileID: 584692384937641554, guid: c0100a85093af8443bb1e628d4d95d47, type: 3}
