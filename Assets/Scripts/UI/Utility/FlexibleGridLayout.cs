@@ -52,8 +52,8 @@ namespace RPG.UI.Utility
             var parentWidth = rectTransform.rect.width;
             var parentHeight = rectTransform.rect.height;
 
-            var cellWidth = (parentWidth / (float)columns); //- ((spacing.x / (float)columns) * (columns - 1)) - (padding.left / (float)columns) - (padding.right / (float)columns);
-            var cellHeight = (parentHeight / (float)rows); //- ((spacing.y / (float)rows) * 2) - (padding.top / (float)rows) - (padding.bottom / (float)rows);
+            var cellWidth = (parentWidth / (float)columns) - ((spacing.x / (float)columns) * (columns - 1)) - (padding.left / (float)columns) - (padding.right / (float)columns);
+            var cellHeight = (parentHeight / (float)rows) - ((spacing.y / (float)rows) * 2) - (padding.top / (float)rows) - (padding.bottom / (float)rows);
             print("Cell Height  " + cellHeight);
 
             cellSize.x = fitX ? cellWidth : cellSize.x;
@@ -75,7 +75,7 @@ namespace RPG.UI.Utility
                 var yPos = (cellSize.y * rowCount) + (spacing.y * rowCount) + padding.top;
 
                 SetChildAlongAxis(item, 0, xPos, cellSize.x);
-                SetChildAlongAxis(item, 0, yPos, cellSize.y);
+                SetChildAlongAxis(item, 1, yPos, cellSize.y);
             }
         }
 
