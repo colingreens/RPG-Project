@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KinematicCharacterController
+namespace RPG.Control.Core
 {
     public interface IMoverController
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace KinematicCharacterController
+namespace RPG.Control.Core
 {
     /// <summary>
     /// The system that manages the simulation of KinematicCharacterMotor and PhysicsMover

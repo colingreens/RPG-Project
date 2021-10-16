@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace KinematicCharacterController
+namespace RPG.Control.Core
 {
     [CreateAssetMenu]
     public class KCCSettings : ScriptableObject

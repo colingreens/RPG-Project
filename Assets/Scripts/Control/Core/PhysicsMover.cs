@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KinematicCharacterController
+namespace RPG.Control.Core
 {
     /// <summary>
     /// Represents the entire state of a PhysicsMover that is pertinent for simulation.
