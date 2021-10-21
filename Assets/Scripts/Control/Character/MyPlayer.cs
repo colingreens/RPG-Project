@@ -84,15 +84,17 @@ namespace RPG.Control.Character
 
         private void HandleCharacterInput()
         {
-            PlayerCharacterInputs characterInputs = new PlayerCharacterInputs();
+            PlayerCharacterInputs characterInputs = new PlayerCharacterInputs
+            {
 
-            // Build the CharacterInputs struct
-            characterInputs.MoveAxisForward = Input.GetAxisRaw(VerticalInput);
-            characterInputs.MoveAxisRight = Input.GetAxisRaw(HorizontalInput);
-            characterInputs.CameraRotation = CharacterCamera.Transform.rotation;
-            characterInputs.JumpDown = Input.GetKeyDown(KeyCode.Space);
-            characterInputs.CrouchDown = Input.GetKeyDown(KeyCode.C);
-            characterInputs.CrouchUp = Input.GetKeyUp(KeyCode.C);
+                // Build the CharacterInputs struct
+                MoveAxisForward = Input.GetAxisRaw(VerticalInput),
+                MoveAxisRight = Input.GetAxisRaw(HorizontalInput),
+                CameraRotation = CharacterCamera.Transform.rotation,
+                JumpDown = Input.GetKeyDown(KeyCode.Space),
+                CrouchDown = Input.GetKeyDown(KeyCode.C),
+                CrouchUp = Input.GetKeyUp(KeyCode.C)
+            };
 
             // Apply inputs to character
             Character.SetInputs(ref characterInputs);
