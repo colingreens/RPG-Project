@@ -6,6 +6,7 @@ namespace RPG.Control.Character
     public class MyPlayer : MonoBehaviour
     {
         public MyCharacterController Character;
+        public Transform CameraFollowPoint;
         public MyCharacterCameraController CharacterCamera;
 
         private const string MouseXInput = "Mouse X";
@@ -23,8 +24,7 @@ namespace RPG.Control.Character
         void Start()
         {    
             // Tell camera to follow transform
-            CharacterCamera.SetFollowTransform(Character.MeshRoot);
-            print(Character.MeshRoot);
+            CharacterCamera.SetFollowTransform(CameraFollowPoint);
 
             // Ignore the character's collider(s) for camera obstruction checks
             CharacterCamera.IgnoredColliders.Clear();
@@ -98,6 +98,13 @@ namespace RPG.Control.Character
 
             // Apply inputs to character
             Character.SetInputs(ref characterInputs);
+
+            // Apply impulse
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Character.Motor.ForceUnground(0.1f);
+                Character.AddVelocity(Vector3.forward * 25f);
+            }
         }
     }
 }

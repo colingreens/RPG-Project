@@ -41,6 +41,7 @@ namespace RPG.Control.Character
         private float _timeSinceJumpRequested = Mathf.Infinity;
         private float _timeSinceLastAbleToJump = 0f;
         private Vector3 _wallJumpNormal;
+        private Vector3 _internalVelocityAdd = Vector3.zero;
 
 
         private void Start()
@@ -195,6 +196,13 @@ namespace RPG.Control.Character
                 }
                 _canWallJump = false;
             }
+
+            // Take into account additive velocity
+            if (_internalVelocityAdd.sqrMagnitude > 0f)
+            {
+                currentVelocity += _internalVelocityAdd;
+                _internalVelocityAdd = Vector3.zero;
+            }
         }
 
         /// <summary>
@@ -251,10 +259,30 @@ namespace RPG.Control.Character
 
         public void PostGroundingUpdate(float deltaTime)
         {
+            // Handle landing and leaving ground
+            if (Motor.GroundingStatus.IsStableOnGround && !Motor.LastGroundingStatus.IsStableOnGround)
+            {
+                OnLanded();
+            }
+            else if (!Motor.GroundingStatus.IsStableOnGround && Motor.LastGroundingStatus.IsStableOnGround)
+            {
+                OnLeaveStableGround();
+            }
+        }
+
+        protected void OnLanded()
+        {
+            Debug.Log("Landed");
+        }
+
+        protected void OnLeaveStableGround()
+        {
+            Debug.Log("Left ground");
         }
 
         public void AddVelocity(Vector3 velocity)
         {
+            _internalVelocityAdd += velocity;
         }
 
         public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport)
