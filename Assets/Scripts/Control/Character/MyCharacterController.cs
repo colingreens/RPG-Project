@@ -18,11 +18,13 @@ namespace RPG.Control.Character
         public float Drag = 0.1f;
 
         [Header("Jumping")]
+        public bool AllowDoubleJump = true;
         public bool AllowJumpingWhenSliding = false;
+        public bool AllowWallJump = true;
         public float JumpSpeed = 10f;
         public float JumpPreGroundingGraceTime = 0f;
         public float JumpPostGroundingGraceTime = 0f;
-        public bool AllowDoubleJump = true;
+        
 
         [Header("Misc")]
         public Vector3 Gravity = new Vector3(0, -30f, 0);
@@ -35,8 +37,10 @@ namespace RPG.Control.Character
         private bool _jumpConsumed = false;
         private bool _doubleJumpConsumed = false;
         private bool _jumpedThisFrame = false;
+        private bool _canWallJump = false;
         private float _timeSinceJumpRequested = Mathf.Infinity;
         private float _timeSinceLastAbleToJump = 0f;
+        private Vector3 _wallJumpNormal;
 
 
         private void Start()
@@ -144,44 +148,52 @@ namespace RPG.Control.Character
                 currentVelocity *= (1f / (1f + (Drag * deltaTime)));
             }
 
-            // Handle jumping
-            _jumpedThisFrame = false;
-            _timeSinceJumpRequested += deltaTime;
-            if (_jumpRequested)
             {
-                if (AllowDoubleJump)
+                // Handle jumping
+                _jumpedThisFrame = false;
+                _timeSinceJumpRequested += deltaTime;
+                if (_jumpRequested)
                 {
-                    if (_jumpConsumed && !_doubleJumpConsumed && (AllowJumpingWhenSliding ? !Motor.GroundingStatus.FoundAnyGround : !Motor.GroundingStatus.IsStableOnGround))
+                    if (AllowDoubleJump)
                     {
+                        if (_jumpConsumed && !_doubleJumpConsumed && (AllowJumpingWhenSliding ? !Motor.GroundingStatus.FoundAnyGround : !Motor.GroundingStatus.IsStableOnGround))
+                        {
+                            Motor.ForceUnground(0.1f);
+
+                            // Add to the return velocity and reset jump state
+                            currentVelocity += (Motor.CharacterUp * JumpSpeed) - Vector3.Project(currentVelocity, Motor.CharacterUp);
+                            _jumpRequested = false;
+                            _doubleJumpConsumed = true;
+                            _jumpedThisFrame = true;
+                        }
+                    }
+                    // See if we actually are allowed to jump
+                    if (_canWallJump ||
+                        !_jumpConsumed && ((AllowJumpingWhenSliding ? Motor.GroundingStatus.FoundAnyGround : Motor.GroundingStatus.IsStableOnGround) || _timeSinceLastAbleToJump <= JumpPostGroundingGraceTime))
+                    {
+                        // Calculate jump direction before ungrounding
+                        Vector3 jumpDirection = Motor.CharacterUp;
+                        if (_canWallJump)
+                        {
+                            jumpDirection = _wallJumpNormal;
+                        }
+                        if (Motor.GroundingStatus.FoundAnyGround && !Motor.GroundingStatus.IsStableOnGround)
+                        {
+                            jumpDirection = Motor.GroundingStatus.GroundNormal;
+                        }
+
+                        // Makes the character skip ground probing/snapping on its next update. 
+                        // If this line weren't here, the character would remain snapped to the ground when trying to jump. Try commenting this line out and see.
                         Motor.ForceUnground(0.1f);
 
                         // Add to the return velocity and reset jump state
-                        currentVelocity += (Motor.CharacterUp * JumpSpeed) - Vector3.Project(currentVelocity, Motor.CharacterUp);
+                        currentVelocity += (jumpDirection * JumpSpeed) - Vector3.Project(currentVelocity, Motor.CharacterUp);
                         _jumpRequested = false;
-                        _doubleJumpConsumed = true;
+                        _jumpConsumed = true;
                         _jumpedThisFrame = true;
                     }
                 }
-                // See if we actually are allowed to jump
-                if (!_jumpConsumed && ((AllowJumpingWhenSliding ? Motor.GroundingStatus.FoundAnyGround : Motor.GroundingStatus.IsStableOnGround) || _timeSinceLastAbleToJump <= JumpPostGroundingGraceTime))
-                {
-                    // Calculate jump direction before ungrounding
-                    Vector3 jumpDirection = Motor.CharacterUp;
-                    if (Motor.GroundingStatus.FoundAnyGround && !Motor.GroundingStatus.IsStableOnGround)
-                    {
-                        jumpDirection = Motor.GroundingStatus.GroundNormal;
-                    }
-
-                    // Makes the character skip ground probing/snapping on its next update. 
-                    // If this line weren't here, the character would remain snapped to the ground when trying to jump. Try commenting this line out and see.
-                    Motor.ForceUnground(0.1f);
-
-                    // Add to the return velocity and reset jump state
-                    currentVelocity += (jumpDirection * JumpSpeed) - Vector3.Project(currentVelocity, Motor.CharacterUp);
-                    _jumpRequested = false;
-                    _jumpConsumed = true;
-                    _jumpedThisFrame = true;
-                }
+                _canWallJump = false;
             }
         }
 
@@ -229,6 +241,12 @@ namespace RPG.Control.Character
 
         public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
         {
+            // We can wall jump only if we are not stable on ground and are moving against an obstruction
+            if (AllowWallJump && !Motor.GroundingStatus.IsStableOnGround && !hitStabilityReport.IsStable)
+            {
+                _canWallJump = true;
+                _wallJumpNormal = hitNormal;
+            }
         }
 
         public void PostGroundingUpdate(float deltaTime)
