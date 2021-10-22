@@ -30,7 +30,7 @@ namespace RPG.Control.Character
         public Vector3 Gravity = new Vector3(0, -30f, 0);
         public Transform MeshRoot;
 
-
+        private Collider[] _probedColliders = new Collider[8];
         private Vector3 _moveInputVector;
         private Vector3 _lookInputVector;
         private bool _jumpRequested = false;
@@ -42,6 +42,8 @@ namespace RPG.Control.Character
         private float _timeSinceLastAbleToJump = 0f;
         private Vector3 _wallJumpNormal;
         private Vector3 _internalVelocityAdd = Vector3.zero;
+        private bool _shouldBeCrouching = false;
+        private bool _isCrouching = false;
 
 
         private void Start()
@@ -75,6 +77,23 @@ namespace RPG.Control.Character
             {
                 _timeSinceJumpRequested = 0f;
                 _jumpRequested = true;
+            }
+
+            // Crouching input
+            if (inputs.CrouchDown)
+            {
+                _shouldBeCrouching = true;
+
+                if (!_isCrouching)
+                {
+                    _isCrouching = true;
+                    Motor.SetCapsuleDimensions(0.5f, 1f, 0.5f);
+                    MeshRoot.localScale = new Vector3(1f, 0.5f, 1f);
+                }
+            }
+            else if (inputs.CrouchUp)
+            {
+                _shouldBeCrouching = false;
             }
         }
 
@@ -234,6 +253,27 @@ namespace RPG.Control.Character
                 {
                     // Keep track of time since we were last able to jump (for grace period)
                     _timeSinceLastAbleToJump += deltaTime;
+                }
+            }
+
+            // Handle uncrouching
+            if (_isCrouching && !_shouldBeCrouching)
+            {
+                // Do an overlap test with the character's standing height to see if there are any obstructions
+                Motor.SetCapsuleDimensions(0.5f, 2f, 1f);
+                if (Motor.CharacterCollisionsOverlap(
+                        Motor.TransientPosition,
+                        Motor.TransientRotation,
+                        _probedColliders) > 0)
+                {
+                    // If obstructions, just stick to crouching dimensions
+                    Motor.SetCapsuleDimensions(0.5f, 1f, 0.5f);
+                }
+                else
+                {
+                    // If no obstructions, uncrouch
+                    MeshRoot.localScale = new Vector3(1f, 1f, 1f);
+                    _isCrouching = false;
                 }
             }
         }

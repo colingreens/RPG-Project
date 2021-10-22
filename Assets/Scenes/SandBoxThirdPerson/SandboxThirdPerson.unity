@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186692898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.73999, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 981543667}
@@ -306,7 +306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735150934}
   m_LocalRotation: {x: 0.48668107, y: -0.51262045, z: -0.50416535, w: 0.49616444}
-  m_LocalPosition: {x: 0.0030383393, y: 9.38401, z: 0.43699566}
+  m_LocalPosition: {x: 0.025, y: 1.5, z: 0.425}
   m_LocalScale: {x: 0.35286, y: 0.08205606, z: 0.67331105}
   m_Children: []
   m_Father: {fileID: 981543667}
@@ -385,7 +385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775071823}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.223, y: 1.693, z: 0.578}
+  m_LocalPosition: {x: -0.024, y: 2.017, z: 0.649}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1988861401}
@@ -446,7 +446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981543666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.723, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 186692899}
@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Character: {fileID: 1988861404}
+  CameraFollowPoint: {fileID: 775071824}
   CharacterCamera: {fileID: 1881096157}
 --- !u!4 &1579706384
 Transform:
@@ -874,7 +875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988861400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.06, z: 0}
+  m_LocalPosition: {x: 0, y: 0.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 981543667}
@@ -957,9 +958,11 @@ MonoBehaviour:
   MaxAirMoveSpeed: 15
   AirAccelerationSpeed: 15
   Drag: 0.1
+  AllowDoubleJump: 1
   AllowJumpingWhenSliding: 0
+  AllowWallJump: 1
   JumpSpeed: 10
   JumpPreGroundingGraceTime: 0
   JumpPostGroundingGraceTime: 0
   Gravity: {x: 0, y: -30, z: 0}
-  MeshRoot: {fileID: 775071824}
+  MeshRoot: {fileID: 981543667}
