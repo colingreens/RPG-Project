@@ -52,6 +52,8 @@ namespace RPG.Control.Character
             }
 
             HandleCameraInput();
+
+            Character.PostInputUpdate(Time.deltaTime, CharacterCamera.transform.forward);
         }
         private void HandleCameraInput()
         {

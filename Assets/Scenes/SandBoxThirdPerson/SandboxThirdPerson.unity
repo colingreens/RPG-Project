@@ -151,7 +151,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 735150935}
+  - {fileID: 1677227626}
   m_Father: {fileID: 981543667}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -306,11 +308,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735150934}
   m_LocalRotation: {x: 0.48668107, y: -0.51262045, z: -0.50416535, w: 0.49616444}
-  m_LocalPosition: {x: 0.025, y: 1.5, z: 0.425}
-  m_LocalScale: {x: 0.35286, y: 0.08205606, z: 0.67331105}
+  m_LocalPosition: {x: 0.025024414, y: 0.49997067, z: 0.42500305}
+  m_LocalScale: {x: 0.35286003, y: 0.08205607, z: 0.67331105}
   m_Children: []
-  m_Father: {fileID: 981543667}
-  m_RootOrder: 1
+  m_Father: {fileID: 186692899}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -1.945, y: -89.959, z: -88.973}
 --- !u!23 &735150936
 MeshRenderer:
@@ -450,7 +452,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 186692899}
-  - {fileID: 735150935}
   m_Father: {fileID: 1988861401}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -625,6 +626,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1677227625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1677227626}
+  - component: {fileID: 1677227629}
+  - component: {fileID: 1677227628}
+  m_Layer: 0
+  m_Name: Cylinder (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1677227626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677227625}
+  m_LocalRotation: {x: -0.6834309, y: -0, z: -0, w: 0.73001516}
+  m_LocalPosition: {x: 0.58410645, y: -0.064, z: 0.326}
+  m_LocalScale: {x: 0.2822, y: 0.79534745, z: 0.1953468}
+  m_Children: []
+  m_Father: {fileID: 186692899}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -86.225, y: 0, z: 0}
+--- !u!23 &1677227628
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677227625}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1677227629
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677227625}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1881096153
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,10 +1041,12 @@ MonoBehaviour:
   AirAccelerationSpeed: 15
   Drag: 0.1
   AllowDoubleJump: 1
-  AllowJumpingWhenSliding: 0
+  AllowJumpingWhenSliding: 1
   AllowWallJump: 1
   JumpSpeed: 10
   JumpPreGroundingGraceTime: 0
   JumpPostGroundingGraceTime: 0
   Gravity: {x: 0, y: -30, z: 0}
+  OrientTowardsGravity: 1
+  FramePerfectRotation: 1
   MeshRoot: {fileID: 981543667}

@@ -28,6 +28,8 @@ namespace RPG.Control.Character
 
         [Header("Misc")]
         public Vector3 Gravity = new Vector3(0, -30f, 0);
+        public bool OrientTowardsGravity = true;
+        public bool FramePerfectRotation = true;
         public Transform MeshRoot;
 
         private Collider[] _probedColliders = new Collider[8];
@@ -96,6 +98,25 @@ namespace RPG.Control.Character
                 _shouldBeCrouching = false;
             }
         }
+        public void PostInputUpdate(float deltaTime, Vector3 cameraForward)
+        {
+            if (FramePerfectRotation)
+            {
+                _lookInputVector = Vector3.ProjectOnPlane(cameraForward, Motor.CharacterUp);
+
+                Quaternion newRotation = default;
+                HandleRotation(ref newRotation, deltaTime);
+                MeshRoot.rotation = newRotation;
+            }
+        }
+
+        private void HandleRotation(ref Quaternion rot, float deltaTime)
+        {
+            if (_lookInputVector != Vector3.zero)
+            {
+                rot = Quaternion.LookRotation(_lookInputVector, Motor.CharacterUp);
+            }
+        }
 
         /// <summary>
         /// (Called by KinematicCharacterMotor during its update cycle)
@@ -120,6 +141,14 @@ namespace RPG.Control.Character
                 // Set the current rotation (which will be used by the KinematicCharacterMotor)
                 currentRotation = Quaternion.LookRotation(smoothedLookInputDirection, Motor.CharacterUp);
             }
+
+            if (OrientTowardsGravity)
+            {
+                // Rotate from current up to invert gravity
+                currentRotation = Quaternion.FromToRotation((currentRotation * Vector3.up), -Gravity) * currentRotation;
+            }
+
+            HandleRotation(ref currentRotation, deltaTime);
         }
 
         /// <summary>
