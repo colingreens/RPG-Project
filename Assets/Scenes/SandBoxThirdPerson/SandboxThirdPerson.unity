@@ -305,13 +305,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735150934}
-  m_LocalRotation: {x: 0.51025826, y: -0.5365565, z: -0.47861227, w: 0.47188357}
-  m_LocalPosition: {x: -0.024047852, y: 9.384985, z: 0.43499756}
+  m_LocalRotation: {x: 0.48668107, y: -0.51262045, z: -0.50416535, w: 0.49616444}
+  m_LocalPosition: {x: 0.0030383393, y: 9.38401, z: 0.43699566}
   m_LocalScale: {x: 0.35286, y: 0.08205606, z: 0.67331105}
   m_Children: []
   m_Father: {fileID: 981543667}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -1.836, y: -95.541, z: -88.788}
+  m_LocalEulerAnglesHint: {x: -1.945, y: -89.959, z: -88.973}
 --- !u!23 &735150936
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -954,19 +954,12 @@ MonoBehaviour:
   MaxStableMoveSpeed: 10
   StableMovementSharpness: 15
   OrientationSharpness: 10
-  OrientationMethod: 0
   MaxAirMoveSpeed: 15
   AirAccelerationSpeed: 15
   Drag: 0.1
   AllowJumpingWhenSliding: 0
-  JumpUpSpeed: 10
-  JumpScalableForwardSpeed: 10
+  JumpSpeed: 10
   JumpPreGroundingGraceTime: 0
   JumpPostGroundingGraceTime: 0
-  IgnoredColliders: []
-  BonusOrientationMethod: 0
-  BonusOrientationSharpness: 10
   Gravity: {x: 0, y: -30, z: 0}
-  MeshRoot: {fileID: 981543667}
-  CameraFollowPoint: {fileID: 775071824}
-  CrouchedCapsuleHeight: 1
+  MeshRoot: {fileID: 775071824}

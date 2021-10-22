@@ -276,12 +276,12 @@ MonoBehaviour:
   drawMode: 1
   mapWidth: 100
   mapHeight: 100
-  noiseScale: 25.3
+  noiseScale: 24.2
   octaves: 5
   persistance: 0.5
   lacunarity: 2
   seed: 9
-  offset: {x: 10.6, y: -0.27}
+  offset: {x: 0.2, y: -0.7}
   autoUpdate: 1
   regions:
   - name: Deep Water

@@ -23,8 +23,8 @@ namespace RPG.Control.Character
         void Start()
         {    
             // Tell camera to follow transform
-            CharacterCamera.SetFollowTransform(Character.CameraFollowPoint);
-            print(Character.CameraFollowPoint);
+            CharacterCamera.SetFollowTransform(Character.MeshRoot);
+            print(Character.MeshRoot);
 
             // Ignore the character's collider(s) for camera obstruction checks
             CharacterCamera.IgnoredColliders.Clear();
