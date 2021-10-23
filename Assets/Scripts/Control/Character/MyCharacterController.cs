@@ -1,5 +1,6 @@
 using UnityEngine;
 using RPG.Control.Core;
+using System;
 
 namespace RPG.Control.Character
 {
@@ -31,6 +32,7 @@ namespace RPG.Control.Character
         public bool OrientTowardsGravity = true;
         public bool FramePerfectRotation = true;
         public Transform MeshRoot;
+        //public Animator _animator;
 
         private Collider[] _probedColliders = new Collider[8];
         private Vector3 _moveInputVector;
@@ -251,6 +253,15 @@ namespace RPG.Control.Character
                 currentVelocity += _internalVelocityAdd;
                 _internalVelocityAdd = Vector3.zero;
             }
+
+            UpdateAnimator(currentVelocity);
+        }
+
+        private void UpdateAnimator(Vector3 velocity)
+        {
+            Vector3 localeVelocity = transform.InverseTransformDirection(velocity);
+            float speed = localeVelocity.z;
+            //_animator.SetFloat("forwardSpeed", speed);
         }
 
         /// <summary>

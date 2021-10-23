@@ -15,7 +15,6 @@ namespace RPG.Control
         [SerializeField] private float maxNavMeshProjectionDistance = 1f;
         [SerializeField] private float raycastRadius = 1f;
 
-        private Fighter fighter;
         private Health health;
         private Mover mover;
 
@@ -29,7 +28,6 @@ namespace RPG.Control
 
         private void Awake()
         {
-            fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
         }
