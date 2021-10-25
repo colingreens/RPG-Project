@@ -1,4 +1,5 @@
 using RPG.Control.Core;
+using RPG.GameEvents.Events;
 using UnityEngine;
 
 namespace RPG.Control.Character
@@ -8,12 +9,16 @@ namespace RPG.Control.Character
         public MyCharacterController Character;
         public Transform CameraFollowPoint;
         public MyCharacterCameraController CharacterCamera;
+        public VoidEvent onZoomEvent;
+        public VoidEvent onUnZoomEvent;
 
         private const string MouseXInput = "Mouse X";
         private const string MouseYInput = "Mouse Y";
         private const string MouseScrollInput = "Mouse ScrollWheel";
         private const string HorizontalInput = "Horizontal";
         private const string VerticalInput = "Vertical";
+
+        private bool isZoomed = false;
 
 
         private void Awake()
@@ -38,6 +43,8 @@ namespace RPG.Control.Character
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
+
+
 
             HandleCharacterInput();
         }
@@ -106,6 +113,23 @@ namespace RPG.Control.Character
             {
                 Character.Motor.ForceUnground(0.1f);
                 Character.AddVelocity(Vector3.forward * 25f);
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (isZoomed)
+                {
+                    onUnZoomEvent.Raise();
+                    isZoomed = false;
+                    Debug.Log("Zooming Out!");
+                }
+                else
+                {
+                    onZoomEvent.Raise();
+                    isZoomed = true;
+                    Debug.Log("Zooming in!");
+                }
+                
             }
         }
     }
