@@ -254,7 +254,7 @@ namespace RPG.Control.Character
             {
                 currentVelocity += _internalVelocityAdd;
                 _internalVelocityAdd = Vector3.zero;
-            }            
+            }
         }
 
         private void UpdateAnimator(Vector3 velocity)
