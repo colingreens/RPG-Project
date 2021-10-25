@@ -562,6 +562,7 @@ namespace RPG.Control.Core
         public void ValidateData()
         {
             Capsule = GetComponent<CapsuleCollider>();
+            Capsule.enabled = true;
             CapsuleRadius = Mathf.Clamp(CapsuleRadius, 0f, CapsuleHeight * 0.5f);
             Capsule.direction = 1;
             Capsule.sharedMaterial = CapsulePhysicsMaterial;

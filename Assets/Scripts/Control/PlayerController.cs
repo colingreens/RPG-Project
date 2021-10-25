@@ -1,4 +1,5 @@
 using RPG.Attributes;
+using RPG.Control.Core;
 using RPG.Movement;
 using System;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace RPG.Control
 
         private Health health;
         private Mover mover;
+        private KinematicCharacterMotor motor;
 
         [System.Serializable]
         struct CursorMapping
@@ -29,6 +31,12 @@ namespace RPG.Control
         {
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
+            motor = GetComponent<KinematicCharacterMotor>();
+        }
+
+        private void Start()
+        {
+            motor.SetCapsuleCollisionsActivation(true);
         }
 
         void Update()

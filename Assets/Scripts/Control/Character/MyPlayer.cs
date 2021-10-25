@@ -34,6 +34,8 @@ namespace RPG.Control.Character
             // Ignore the character's collider(s) for camera obstruction checks
             CharacterCamera.IgnoredColliders.Clear();
             CharacterCamera.IgnoredColliders.AddRange(Character.GetComponentsInChildren<Collider>());
+
+
         }
 
         // Update is called once per frame

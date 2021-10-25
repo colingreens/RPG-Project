@@ -775,15 +775,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678112587167526773, guid: 46b512b85a2e3d242b7182367f0a03c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4
+      value: -51.07
       objectReference: {fileID: 0}
     - target: {fileID: 2678112587167526773, guid: 46b512b85a2e3d242b7182367f0a03c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 2678112587167526773, guid: 46b512b85a2e3d242b7182367f0a03c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.75
+      value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 2883410617616660805, guid: 46b512b85a2e3d242b7182367f0a03c1, type: 3}
       propertyPath: defaultWeaponName
