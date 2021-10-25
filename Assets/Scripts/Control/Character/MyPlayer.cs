@@ -42,6 +42,11 @@ namespace RPG.Control.Character
             HandleCharacterInput();
         }
 
+        private void FixedUpdate()
+        {
+                        
+        }
+
         private void LateUpdate()
         {
             // Handle rotating the camera along with physics movers
