@@ -4,7 +4,7 @@ using System;
 
 namespace RPG.Control.Character
 {
-     public class MyCharacterController : MonoBehaviour, ICharacterController
+     public class PlayerDriver : MonoBehaviour, ICharacterController
     {
         public KinematicCharacterMotor Motor;
 

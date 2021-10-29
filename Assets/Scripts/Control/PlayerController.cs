@@ -1,10 +1,8 @@
 using RPG.Attributes;
-using RPG.Control.Core;
 using RPG.Movement;
 using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 namespace RPG.Control
@@ -17,7 +15,6 @@ namespace RPG.Control
 
         private Health health;
         private Mover mover;
-        private KinematicCharacterMotor motor;
 
         [System.Serializable]
         struct CursorMapping
@@ -31,12 +28,6 @@ namespace RPG.Control
         {
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
-            motor = GetComponent<KinematicCharacterMotor>();
-        }
-
-        private void Start()
-        {
-            motor.SetCapsuleCollisionsActivation(true);
         }
 
         void Update()
@@ -53,9 +44,6 @@ namespace RPG.Control
             if (InteractWithComponent())
                 return;
 
-            if (InteractWithMovement())
-                return;
-
             SetCursor(CursorType.None);
         }
 
@@ -65,7 +53,7 @@ namespace RPG.Control
             Cursor.SetCursor(mapping.texture, mapping.hotSpot, CursorMode.Auto);
         }
 
-        private bool InteractWithComponent()
+        public bool InteractWithComponent()
         {
             var hits = RaycastAllSorted();
             foreach (var hit in hits)
@@ -107,44 +95,6 @@ namespace RPG.Control
                 return true;
             }
             return false;
-        }
-
-        private bool InteractWithMovement()
-        {
-            Vector3 target;
-            var hasHit = RaycastNavMesh(out target);
-
-            if (hasHit)
-            {
-                if (!mover.CanMoveTo(target))
-                    return false;
-
-                if (Input.GetMouseButton(0))
-                {
-                    mover.StartMoveAction(target, 1f);
-                }
-                SetCursor(CursorType.Movement);
-                return true;
-            }
-            return false;
-        }
-
-        private bool RaycastNavMesh(out Vector3 target)
-        {
-            target = new Vector3();
-            var hasHit = Physics.Raycast(GetMouseRay(), out RaycastHit hit);
-
-            if (!hasHit)
-                return false;
-
-            var hasCastToNavMesh = NavMesh.SamplePosition(hit.point, out NavMeshHit navMeshHit,maxNavMeshProjectionDistance, NavMesh.AllAreas);
-
-            if (!hasCastToNavMesh)
-                return false;
-
-            target = navMeshHit.position;
-
-            return mover.CanMoveTo(target);
         }
 
         private CursorMapping GetCursorMapping(CursorType type)

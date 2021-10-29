@@ -6,11 +6,12 @@ namespace RPG.Control.Character
 {
     public class MyPlayer : MonoBehaviour
     {
-        public MyCharacterController Character;
+        public PlayerDriver Character;
         public Transform CameraFollowPoint;
         public MyCharacterCameraController CharacterCamera;
         public VoidEvent onZoomEvent;
         public VoidEvent onUnZoomEvent;
+        public PlayerController playerController;
 
         private const string MouseXInput = "Mouse X";
         private const string MouseYInput = "Mouse Y";
@@ -44,6 +45,11 @@ namespace RPG.Control.Character
             if (Input.GetMouseButtonDown(0))
             {
                 Cursor.lockState = CursorLockMode.Locked;
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                playerController.InteractWithComponent();
             }
 
 
