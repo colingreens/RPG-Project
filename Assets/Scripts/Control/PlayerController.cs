@@ -111,5 +111,11 @@ namespace RPG.Control
         {
             return gameObject;
         }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(transform.position, 1);
+        }
     }
 }

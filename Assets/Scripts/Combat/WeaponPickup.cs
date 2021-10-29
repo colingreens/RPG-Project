@@ -9,6 +9,8 @@ namespace RPG.Combat
         [SerializeField] WeaponConfig weapon;
         [SerializeField] float respawnTime = 5f;
 
+        private Color startcolor;
+
         private void OnTriggerEnter(Collider other)
         {
             print("Player has entered pickup");
