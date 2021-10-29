@@ -14,7 +14,7 @@ namespace RPG.Combat
             print("Player has entered pickup");
             if (other.tag == "Player")
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (Input.GetKeyDown(KeyCode.E))
                     Pickup(other.GetComponent<InventoryHandler>());
             }
         }

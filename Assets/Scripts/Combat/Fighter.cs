@@ -44,13 +44,8 @@ namespace RPG.Combat
             if (target.IsDead())
                 return;
 
-            if (target != null && !GetIsInRange(target.transform))
-                GetComponent<Mover>().MoveTo(target.transform.position, 1f);
-            else
-            {
-                GetComponent<Mover>().Cancel();
-                AttackBehavior();
-            }
+             AttackBehavior();
+            
         }
         private Weapon SetupDefaultWeapon()
         {

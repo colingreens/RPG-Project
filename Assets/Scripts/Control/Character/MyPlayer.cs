@@ -47,10 +47,10 @@ namespace RPG.Control.Character
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                playerController.InteractWithComponent();
-            }
+            //if (Input.GetKeyDown(KeyCode.E))
+            //{
+            //    playerController.InteractWithComponent();
+            //}
 
 
 
